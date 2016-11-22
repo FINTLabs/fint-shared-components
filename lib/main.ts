@@ -46,3 +46,8 @@ import { HighlightPipe } from './pipes/highlight.pipe';
   ]
 })
 export class LibModule { }
+
+export * from './events';
+export * from './fontawesome';
+export * from './pager';
+export * from './pipes';
