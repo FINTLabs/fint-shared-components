@@ -26,7 +26,6 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     PagerComponent,
 
     // Pipes
-    EventFilterPipe,
     HighlightPipe,
     UtcDatePipe
   ],
