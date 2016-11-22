@@ -1,0 +1,244 @@
+<h2>Hendelser</h2>
+
+<div>
+  Viser et hendelsesforløp
+</div>
+
+<md-card>
+  <md-card-title>
+    <md-input [(ngModel)]="searchstring" role="searchbox">
+      <button md-suffix md-button role="search"><app-fa name="search"></app-fa>Søk</button>
+      <button md-suffix md-button (click)="searchstring = ''"><app-fa name="times"></app-fa></button>
+    </md-input>
+  </md-card-title>
+  <md-card-content class="table-container" *ngIf="events">
+    <app-pager [(start)]="start" [(end)]="end" [total]="total" [(current)]="current"></app-pager>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Source</th>
+          <th>Action</th>
+          <th>Status</th>
+          <th>Client</th>
+          <th>At</th>
+        </tr>
+      </thead>
+
+      <tbody *ngFor="let event of filteredEvents | slice:start:end;">
+        <tr (click)="openEvent(event)">
+          <td [innerHTML]="event.corrId | highlight:searchstring"></td>
+          <td [innerHTML]="event.source | highlight:searchstring"></td>
+          <td [innerHTML]="event.event.verb | highlight:searchstring"></td>
+          <td [innerHTML]="event.event.status | highlight:searchstring"></td>
+          <td [innerHTML]="event.event.client | highlight:searchstring"></td>
+          <td [innerHTML]="event.event.time | utcDate | highlight:searchstring"></td>
+        </tr>
+        <tr *ngIf="event.isOpen || filteredEvents.length === 1">
+          <td colspan="6">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0.0 0.0 610 590">
+              <defs>
+                <path id="downstream_arrow" d="m0 0l0 50l-30 30l-30 -30l0 -50z" />
+                <path id="downstream_error" d="m0 0l0 50l-26 26l-26 -26l0 -50z" />
+                <path id="upstream_arrow" d="m0 0l0 -50l30 -30l30 30l0 50z" />
+                <path id="upstream_error" d="m0 0l0 -50l26 -26l26 26l0 50z" />
+                <path id="upstream_long_arrow" d="m0 0l0 -90l30 -30l30 30l0 90z" />
+                <path id="descission" d="m0 0l27 -16l27 16l-27 16z" />
+                <path id="descission_small" d="m0 0l12 -9l12 9l-12 9z" />
+              </defs>
+              <g>
+                <g id="downstream_direction">
+                  <path d="m0 553l15 0l0 -552l31 0l0 552l15 0l-31 31z" />
+                  <text style="transform: rotateZ(90deg) translate(200px, -25px); letter-spacing: 0.5em;">Downstream</text>
+                </g>
+                <g id="upstream_direction">
+                  <path d="m554 30l29 -29l29 29l-14 0l0 554l-29 0l0 -554z" />
+                  <text style="transform: rotateZ(-90deg) translate(-350px, 588px); letter-spacing: 0.5em;">Upstream</text>
+                </g>
+                <g id="Client_CacheService" transform="translate(110, 0)">
+                  <path fill="#ff9900" d="m0 0l365 0l0 44l-365 0z" />
+                  <text fill="#000000" transform="translate(110, 30)">
+                    Client / CacheService
+                  </text>
+                </g>
+
+                <g id="Provider" transform="translate(110, 490)">
+                  <path fill="#666666" d="m0 0l365 0l0 36l-365 0z" />
+                  <text transform="translate(150, 25)" style="fill: #d9d9d9">
+                    Provider
+                  </text>
+                </g>
+
+                <g id="Cache_DB" [attr.class]="isActive(event, 'CACHE') || isActive(event, 'CACHE_RESPONSE') ? 'active' : ''" transform="translate(225, 345)">
+                  <path fill="#b7b7b7" d="m0 0l0 0c0 -12 32 -22 72 -22c40 0 72 10 72 22l0 90c0 12 -32 22 -72 22c-40 0 -72 -10 -72 -22z" />
+                  <path stroke="#efefef" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="butt" d="m144 0l0 0c0 12 -32 22 -72 22c-40 0 -72 -10 -72 -22"
+                  />
+                  <text transform="translate(44, 65)">
+                    Cache
+                  </text>
+                </g>
+
+                <g id="downstream">
+                  <g id="NEW" [attr.class]="'stream ' + (isActive(event, 'NEW') ? 'active' : '')" transform="translate(219, 69)">
+                    <use xlink:href="#downstream_arrow" x="55" y="0" />
+                    <text transform="translate(14, 20)">
+                      NEW
+                    </text>
+                  </g>
+
+                  <g class="pathLink" transform="translate(160,0)">
+                    <path [attr.class]="(isActive(event, 'NEW') && isActive(event, 'CACHE') ? 'link' : '')" d="m84 147l0 85" />
+                    <path [attr.class]="(isActive(event, 'NEW') && isActive(event, 'DOWNSTREAM_QUEUE') ? 'link' : '')" d="m84 147l0 44l-75 0l0 40"
+                    />
+                    <use id="decide_NEW__CACHE-DOWNSTREAM_QUEUE" xlink:href="#descission" class="descission" x="56" y="191" />
+                  </g>
+
+                  <g id="CACHE" [attr.class]="'stream ' + (isActive(event, 'CACHE') ? 'active' : '')" transform="translate(219, 230)">
+                    <use xlink:href="#downstream_arrow" x="55" y="0" />
+                    <text transform="translate(12, 20)">
+                      CACHE
+                    </text>
+                  </g>
+
+                  <g id="DOWNSTREAM_QUEUE" [attr.class]="'stream ' + (isActive(event, 'DOWNSTREAM_QUEUE') ? 'active' : '')" transform="translate(144, 230)">
+                    <use xlink:href="#downstream_arrow" x="55" y="0" />
+                    <text transform="translate(0, 20)">
+                      <tspan x="0" y="0">DOWNSTREAM</tspan>
+                      <tspan x="5" y="10">_QUEUE</tspan>
+                    </text>
+                    <g [attr.class]="(isActive(event, 'UNABLE_TO_DELIVER') ? 'errorLink' : 'noLink')" transform="translate(-18, 0)">
+                      <path class="link" d="m4 43l-56 0l0 287l454 0l0 -252l-72 0" />
+                      <use id="decide_DOWNSTREAM_QUEUE-error" xlink:href="#descission_small" class="descission" x="3" y="43" />
+                    </g>
+                  </g>
+
+                  <g id="DELIVERED_TO_PROVIDER" [attr.class]="'stream ' + (isActive(event, 'DELIVERED_TO_PROVIDER') ? 'active' : '')" transform="translate(144, 310)">
+                    <use xlink:href="#downstream_arrow" x="55" y="0" />
+                    <text transform="translate(0, 20)">
+                      <tspan x="0" y="0">DELIVERED</tspan>
+                      <tspan x="10" y="10">_TO</tspan>
+                      <tspan x="0" y="20">_PROVIDER</tspan>
+                    </text>
+                    <g [attr.class]="(isActive(event, 'NO_RESPONSE_FOR_PROVIDER') || isActive(event, 'PROVIDER_REJECTED') || isActive(event, 'PROVIDER_NOT_CONFIRMED') ? 'errorLink' : 'noLink')"
+                      transform="translate(-18, 0)">
+                      <path class="link" d="m4 43l-56 0l0 207l454 0l0 -252l-72 0" />
+                      <use id="decide_DELIVERED_TO_PROVIDER-error" xlink:href="#descission_small" class="descission" x="3" y="43" />
+                    </g>
+                  </g>
+
+                  <g id="PROVIDER_ACCEPTED" [attr.class]="'stream ' + (isActive(event, 'PROVIDER_ACCEPTED') ? 'active' : '')" transform="translate(144, 393)">
+                    <use xlink:href="#downstream_arrow" x="55" y="0" />
+                    <text transform="translate(0, 20)">
+                      <tspan x="5" y="0">PROVIDER</tspan>
+                      <tspan x="0" y="10">_ACCEPTED</tspan>
+                    </text>
+                  </g>
+
+                  <g class="errors" transform="translate(80, 393)">
+                    <g id="PROVIDER_RESPONSE_ORPHAN" [attr.class]="'error ' + (isActive(event, 'PROVIDER_RESPONSE_ORPHAN') ? 'active' : '')">
+                      <use xlink:href="#downstream_error" x="50" y="0" />
+                      <text transform="translate(0, 20)">
+                        <tspan x="5" y="0">PROVIDER</tspan>
+                        <tspan x="0" y="10">_RESPONSE</tspan>
+                        <tspan x="0" y="20">_ORPHAN</tspan>
+                      </text>
+                    </g>
+                  </g>
+                </g>
+
+                <g id="upstream">
+                  <g id="PROVIDER_RESPONSE" [attr.class]="'stream ' + (isActive(event, 'PROVIDER_RESPONSE') ? 'active' : '')" transform="translate(412, 372)">
+                    <use xlink:href="#upstream_long_arrow" x="-15" y="99" />
+                    <text transform="translate(-8, 20)">
+                      <tspan x="2" y="0">PROVIDER</tspan>
+                      <tspan x="0" y="10">_RESPONSE</tspan>
+                    </text>
+                    <g [attr.class]="(isActive(event, 'PROVIDER_RESPONSE_ORPHAN') ? 'errorLink' : 'noLink')" transform="translate(31, 81)">
+                      <path class="link source_PROVIDER_RESPONSE target_PROVIDER_RESPONSE_ORPHAN" d="m15 0l24 0l0 79l-378 0l0 -64" />
+                      <use id="" xlink:href="#descission_small" class="descission" x="0" y="0" />
+                    </g>
+                  </g>
+
+                  <g class="errors" transform="translate(501, 355)">
+                    <g id="NO_RESPONSE_FOR_PROVIDER" [attr.class]="'error ' + (isActive(event, 'NO_RESPONSE_FOR_PROVIDER') ? 'active' : '')"
+                      transform="translate(0, 0)">
+                      <use xlink:href="#upstream_error" x="0" y="50" />
+                      <text transform="translate(0, 10)">
+                        <tspan x="15" y="0">NO</tspan>
+                        <tspan x="0" y="10">_RESPONSE</tspan>
+                        <tspan x="5" y="20">_FOR</tspan>
+                        <tspan x="0" y="30">_PROVIDER</tspan>
+                      </text>
+                    </g>
+
+                    <g id="PROVIDER_REJECTED" [attr.class]="'error ' + (isActive(event, 'PROVIDER_REJECTED') ? 'active' : '')" transform="translate(0, 0)">
+                      <use xlink:href="#upstream_error" x="0" y="50" />
+                      <text transform="translate(0, 20)">
+                        <tspan x="5" y="0">PROVIDER</tspan>
+                        <tspan x="0" y="10">_REJECTED</tspan>
+                      </text>
+                    </g>
+
+                    <g id="PROVIDER_NOT_CONFIRMED" [attr.class]="'error ' + (isActive(event, 'PROVIDER_NOT_CONFIRMED') ? 'active' : '')" transform="translate(0, 0)">
+                      <use xlink:href="#upstream_error" x="0" y="50" />
+                      <text transform="translate(0, 20)">
+                        <tspan x="5" y="0">PROVIDER</tspan>
+                        <tspan x="10" y="10">_NOT</tspan>
+                        <tspan x="0" y="20">_CONFIRMED</tspan>
+                      </text>
+                    </g>
+
+                    <g id="UNABLE_TO_DELIVER" [attr.class]="'error ' + (isActive(event, 'UNABLE_TO_DELIVER') ? 'active' : '')" transform="translate(0, 0)">
+                      <use xlink:href="#upstream_error" x="0" y="50" />
+                      <text transform="translate(0, 20)">
+                        <tspan x="5" y="0">UNABLE</tspan>
+                        <tspan x="15" y="10">_TO</tspan>
+                        <tspan x="0" y="20">_DELIVER</tspan>
+                      </text>
+                    </g>
+                  </g>
+
+                  <g id="UPSTREAM_QUEUE" [attr.class]="'stream ' + (isActive(event, 'UPSTREAM_QUEUE') ? 'active' : '')" transform="translate(412, 252)">
+                    <use xlink:href="#upstream_long_arrow" x="-15" y="99" />
+                    <text transform="translate(-8, 20)">
+                      <tspan x="5" y="0">UPSTREAM</tspan>
+                      <tspan x="10" y="10">_QUEUE</tspan>
+                    </text>
+                  </g>
+
+                  <g id="CACHE_RESPONSE" [attr.class]="'stream ' + (isActive(event, 'CACHE_RESPONSE') ? 'active' : '')" transform="translate(325, 252)">
+                    <use xlink:href="#upstream_arrow" x="-15" y="55" />
+                    <text transform="translate(-8, 20)">
+                      <tspan x="10" y="0">CACHE</tspan>
+                      <tspan x="0" y="10">_RESPONSE</tspan>
+                    </text>
+                  </g>
+
+                  <g class="pathLink" transform="translate(260,0)">
+                    <path [attr.class]="(isActive(event, 'CACHE_RESPONSE') && isActive(event, 'SENT_TO_CLIENT') ? 'link' : '')" d="m80 147l0 83"
+                    />
+                    <path [attr.class]="(isActive(event, 'UPSTREAM_QUEUE') && isActive(event, 'SENT_TO_CLIENT') ? 'link' : '')" d="m80 147l0 44l87 0l0 41"
+                    />
+                    <use id="decide_CACHE_RESPONSE__UPSTREAM_QUEUE-SENT_TO_CLIENT" xlink:href="#descission" class="descission" x="53" y="191"
+                    />
+                  </g>
+
+                  <g id="SENT_TO_CLIENT" [attr.class]="'stream ' + (isActive(event, 'SENT_TO_CLIENT') ? 'active' : '')" transform="translate(325, 93)">
+                    <use xlink:href="#upstream_arrow" x="-15" y="55" />
+                    <text transform="translate(0, 20)">
+                      <tspan x="0" y="0">SENT_TO</tspan>
+                      <tspan x="0" y="10">_CLIENT</tspan>
+                    </text>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+  <md-card-actions>
+    <app-pager [(start)]="start" [(end)]="end" [total]="total" [(current)]="current"></app-pager>
+  </md-card-actions>
+</md-card>

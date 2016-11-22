@@ -1,0 +1,88 @@
+md-input {
+  width: 100%;
+  button {
+    float: right;
+    padding: 0;
+    margin: 0;
+    margin-bottom: -1em;
+    min-width: 2em;
+  }
+}
+md-card-content app-pager {
+  margin-top: -2em;
+}
+
+tbody {
+  tr:first-child td {
+    cursor: pointer;
+  }
+  td[colspan] {
+    text-align: center;
+    border-top: 0;
+  }
+}
+
+svg {
+  max-width: 600px;
+  fill: none;
+  stroke: none;
+  stroke-linecap: square;
+  stroke-miterlimit: 10;
+  #downstream_direction, #upstream_direction {
+    fill: #cfe2f3;
+  }
+  text {
+    fill: #000000;
+    font-family: Arial;
+    font-size: 1.15em;
+  }
+  .descission {
+    fill: #f1c232;
+    opacity: 1;
+  }
+  .link {
+    stroke: #000000;
+    stroke-width: 1.0;
+    stroke-linejoin: round;
+    stroke-linecap: butt;
+  }
+  #Cache_DB {
+    opacity: 0.3;
+    &.active {
+      opacity: 1;
+    }
+  }
+  #downstream .stream > use {
+    fill: #6aa84f;
+  }
+  #upstream .stream > use {
+    fill: #3d85c6;
+  }
+  .stream text, .error text {
+    font-family: Monospace;
+    font-size: 0.7em;
+  }
+  .stream {
+    > use {
+      opacity: 0.2;
+    }
+    &.active > use {
+      opacity: 1;
+    }
+    .noLink {
+      opacity: 0;
+    }
+  }
+  .error {
+    opacity: 0;
+    &.active {
+      opacity: 1;
+    }
+    text {
+      fill: #ffffff;
+    }
+    > use {
+      fill: #cc0000;
+    }
+  }
+}
