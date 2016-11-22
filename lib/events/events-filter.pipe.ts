@@ -1,4 +1,4 @@
-import { UtcDatePipe } from '../pipes/utc-date.pipe';
+import { UtcDatePipe } from '../shared/pipes/utc-date.pipe';
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 import { IEvents } from './events.service';
 

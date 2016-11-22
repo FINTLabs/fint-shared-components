@@ -1,3 +1,4 @@
+import { LibSharedModule } from '../shared/shared.module';
 // Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -22,7 +23,11 @@ import { EventFilterPipe } from './events-filter.pipe';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    LibSharedModule,
     RouterModule.forChild([...EventRoutes])
+  ],
+  exports: [
+    EventFilterPipe
   ],
   providers: [EventService]
 })
