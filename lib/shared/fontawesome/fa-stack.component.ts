@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 
 @Component({
-  selector: 'lib-fa-stack',
+  selector: 'fint-fa-stack',
   template: `<i [className]="classList"></i>`/*,
   styleUrls: ['fa-stack.component.css']*/
 })

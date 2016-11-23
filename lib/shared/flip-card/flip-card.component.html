@@ -1,0 +1,7 @@
+<button md-icon-button *ngIf="canAnimate()" (click)="onFlip()"><fint-fa name="ellipsis-v"></fint-fa></button>
+<div class="frontside">
+  <ng-content select=".front"></ng-content>
+</div>
+<div class="backside">
+  <ng-content select=".back"></ng-content>
+</div>

@@ -1,7 +1,7 @@
 <ul class="unstyled">
-  <li><button md-button (click)="goto('start')"><lib-fa name="fast-backward"></lib-fa></button></li>
-  <li><button md-button (click)="goto('backward')"><lib-fa name="step-backward"></lib-fa></button></li>
+  <li><button md-button (click)="goto('start')"><fint-fa name="fast-backward"></fint-fa></button></li>
+  <li><button md-button (click)="goto('backward')"><fint-fa name="step-backward"></fint-fa></button></li>
   <li *ngFor="let index of sequence;"><span>{{ index }} / {{ totalPages }}</span></li>
-  <li><button md-button (click)="goto('forward')"><lib-fa name="step-forward"></lib-fa></button></li>
-  <li><button md-button (click)="goto('end')"><lib-fa name="fast-forward"></lib-fa></button></li>
+  <li><button md-button (click)="goto('forward')"><fint-fa name="step-forward"></fint-fa></button></li>
+  <li><button md-button (click)="goto('end')"><fint-fa name="fast-forward"></fint-fa></button></li>
 </ul>

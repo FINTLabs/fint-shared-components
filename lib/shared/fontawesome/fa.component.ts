@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, Input, ElementRef, SimpleChange } from '@
 import { each } from 'lodash';
 
 @Component({
-  selector: 'lib-fa',
+  selector: 'fint-fa',
   templateUrl: './fa.component.html'
 })
 export class FaComponent implements OnInit, OnChanges {

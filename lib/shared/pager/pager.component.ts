@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { range } from 'lodash';
 
 @Component({
-  selector: 'lib-pager',
+  selector: 'fint-pager',
   templateUrl: './pager.component.html',
   styleUrls: ['./pager.component.scss']
 })

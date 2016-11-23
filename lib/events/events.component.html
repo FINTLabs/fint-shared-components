@@ -7,12 +7,12 @@
 <md-card>
   <md-card-title>
     <md-input [(ngModel)]="searchstring" role="searchbox">
-      <button md-suffix md-button role="search"><lib-fa name="search"></lib-fa>Søk</button>
-      <button md-suffix md-button (click)="searchstring = ''"><lib-fa name="times"></lib-fa></button>
+      <button md-suffix md-button role="search"><fint-fa name="search"></fint-fa>Søk</button>
+      <button md-suffix md-button (click)="searchstring = ''"><fint-fa name="times"></fint-fa></button>
     </md-input>
   </md-card-title>
   <md-card-content class="table-container" *ngIf="events">
-    <lib-pager [(start)]="start" [(end)]="end" [total]="total" [(current)]="current"></lib-pager>
+    <fint-pager [(start)]="start" [(end)]="end" [total]="total" [(current)]="current"></fint-pager>
     <table>
       <thead>
         <tr>
@@ -239,6 +239,6 @@
     </table>
   </md-card-content>
   <md-card-actions>
-    <lib-pager [(start)]="start" [(end)]="end" [total]="total" [(current)]="current"></lib-pager>
+    <fint-pager [(start)]="start" [(end)]="end" [total]="total" [(current)]="current"></fint-pager>
   </md-card-actions>
 </md-card>

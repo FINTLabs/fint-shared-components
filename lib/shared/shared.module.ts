@@ -1,3 +1,4 @@
+import { FlipCardComponent } from './flip-card/flip-card.component';
 // Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,6 +18,7 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     FaComponent,
     FaStackComponent,
     PagerComponent,
+    FlipCardComponent,
 
     // Pipes
     HighlightPipe,
