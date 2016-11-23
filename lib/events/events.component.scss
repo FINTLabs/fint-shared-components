@@ -61,8 +61,15 @@ svg {
   .stream text, .error text {
     font-family: Monospace;
     font-size: 0.7em;
+    transition: transform 0.2s ease-in;
   }
   .stream {
+    &:hover {
+      text {
+        transform-origin: center;
+        transform: translate(-10px, -10px) scale(1.4);
+      }
+    }
     > use {
       opacity: 0.2;
     }
