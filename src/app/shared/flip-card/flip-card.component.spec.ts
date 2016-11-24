@@ -2,7 +2,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { MaterialModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
+import { FaComponent } from '../fontawesome';
 import { FlipCardComponent } from './flip-card.component';
 
 describe('FlipCardComponent', () => {
@@ -11,9 +14,13 @@ describe('FlipCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FlipCardComponent ]
+      imports: [
+        FormsModule,
+        MaterialModule
+      ],
+      declarations: [FlipCardComponent, FaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -32,6 +32,7 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     FaComponent,
     FaStackComponent,
     PagerComponent,
+    FlipCardComponent,
 
     // Pipes
     HighlightPipe,

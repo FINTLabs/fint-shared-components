@@ -1,3 +1,4 @@
+import { ViewChild } from '@angular/core/src/metadata/di';
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer } from '@angular/core';
 
 export enum SIDES {
@@ -14,28 +15,25 @@ export enum SIDES {
 export class FlipCardComponent implements OnInit, AfterViewInit {
   @Input() axis: string = 'Y';
   @Input() duration: number = 800;
+  @ViewChild('frontside') _front: ElementRef;
+  @ViewChild('backside') _back: ElementRef;
 
   _locked: boolean = false;
   _side = SIDES.FRONT;
-  _front;
-  _back;
 
   constructor(private elm: ElementRef, private renderer: Renderer) { }
 
-  ngOnInit() {
-    this._front = this.elm.nativeElement.querySelector('.frontside');
-    this._back = this.elm.nativeElement.querySelector('.backside');
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
-    let frontHeight = this._front.firstElementChild.offsetHeight;
-    let backHeight = this._back.firstElementChild.offsetHeight;
+    let frontHeight = this._front.nativeElement.firstElementChild ? this._front.nativeElement.firstElementChild.offsetHeight : 0;
+    let backHeight = this._back.nativeElement.firstElementChild ? this._back.nativeElement.firstElementChild.offsetHeight : 0;
     let height = Math.max(frontHeight, backHeight) + 20;
     this.renderer.setElementStyle(this.elm.nativeElement, 'min-height', height + 'px'); //this._front.offsetHeight);
   }
 
   canAnimate() {
-    return this._front.animate != null;
+    return this._front.nativeElement.animate != null;
   }
 
   onFlip() {
@@ -69,17 +67,17 @@ export class FlipCardComponent implements OnInit, AfterViewInit {
 
     switch (this._side) {
       case SIDES.FRONT:
-        this._front.animate(sideOne, timing);
-        this._back.animate(sideTwo, timing).onfinish = _ => this.onFlipFinish();
+        this._front.nativeElement.animate(sideOne, timing);
+        this._back.nativeElement.animate(sideTwo, timing).onfinish = _ => this.onFlipFinish();
 
-        this._back.focus();
+        this._back.nativeElement.focus();
         break;
 
       case SIDES.BACK:
-        this._front.animate(sideTwo, timing);
-        this._back.animate(sideOne, timing).onfinish = _ => this.onFlipFinish();
+        this._front.nativeElement.animate(sideTwo, timing);
+        this._back.nativeElement.animate(sideOne, timing).onfinish = _ => this.onFlipFinish();
 
-        this._front.focus();
+        this._front.nativeElement.focus();
         break;
 
       default:

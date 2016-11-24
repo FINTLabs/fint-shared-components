@@ -1,23 +1,29 @@
+import { MaterialModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { EventsComponent } from './events.component';
+import { FaComponent } from './fa.component';
 
-describe('EventsComponent', () => {
-  let component: EventsComponent;
-  let fixture: ComponentFixture<EventsComponent>;
+describe('FaComponent', () => {
+  let component: FaComponent;
+  let fixture: ComponentFixture<FaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventsComponent ]
+      imports: [
+        FormsModule,
+        MaterialModule
+      ],
+      declarations: [FaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EventsComponent);
+    fixture = TestBed.createComponent(FaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

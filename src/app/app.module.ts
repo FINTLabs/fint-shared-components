@@ -1,17 +1,19 @@
-import { LibSharedModule } from './shared/shared.module';
-import { EventFilterPipe } from './events/events-filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { MaterialModule } from '@angular/material';
 
+import { LibSharedModule } from './shared/shared.module';
 import { EventModule } from './events/events.module';
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
     HttpModule,
+    FormsModule,
+    MaterialModule, //.forRoot(),
+
     EventModule,
     LibSharedModule
   ],
@@ -23,6 +25,3 @@ import { EventModule } from './events/events.module';
   ]
 })
 export class LibModule { }
-
-export * from './events';
-export * from './shared';

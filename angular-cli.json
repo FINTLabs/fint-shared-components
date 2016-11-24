@@ -5,17 +5,17 @@
   },
   "apps": [
     {
-      "root": "lib",
+      "root": "src",
       "outDir": "dist",
       "assets": [
         "assets",
         "favicon.ico"
       ],
-      "index": "",
+      "index": "index.html",
       "main": "main.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
-      "prefix": "lib",
+      "prefix": "fint",
       "mobile": false,
       "styles": [
         "styles.scss"

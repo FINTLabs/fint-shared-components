@@ -10,8 +10,4 @@ describe('Pipe: EventFilter', () => {
   it('create an instance', () => {
     expect(pipe).toBeTruthy();
   });
-
-  it('converts a datestamp', () => {
-    expect(pipe.toDateString(new Date().valueOf)).toBeTruthy();
-  });
 });
