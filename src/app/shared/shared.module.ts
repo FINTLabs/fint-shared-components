@@ -1,3 +1,4 @@
+import { TypeaheadComponent } from './typeahead';
 import { FlipCardComponent } from './flip-card/flip-card.component';
 // Modules
 import { NgModule } from '@angular/core';
@@ -19,6 +20,7 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     FaStackComponent,
     PagerComponent,
     FlipCardComponent,
+    TypeaheadComponent,
 
     // Pipes
     HighlightPipe,
@@ -33,6 +35,7 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     FaStackComponent,
     PagerComponent,
     FlipCardComponent,
+    TypeaheadComponent,
 
     // Pipes
     HighlightPipe,

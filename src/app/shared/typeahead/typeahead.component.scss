@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  position: relative;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  md-input {
+    width: 100%;
+    position: relative;
+    display: block;
+  }
+
+  md-card {
+    position: absolute;
+    left: 0;
+    top: 23px;
+    display: block;
+    z-index: 10;
+    width: 100%;
+    margin: 0;
+    padding: 8px 0;
+    max-height: 256px;
+    min-height: 48px;
+    overflow-y: auto;
+
+    md-list-item {
+      cursor: pointer;
+    }
+  }
+}

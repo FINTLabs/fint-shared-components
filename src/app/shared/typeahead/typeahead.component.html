@@ -1,0 +1,12 @@
+<md-input placeholder="{{placeholder}}" type="search" (focus)="onEnter()" (blur)="onLeave()" (keyup)="onKeyUp($event)" [(value)]="value"
+  placeholder="{{placeholder}}" required="{{required}}">
+  <ng-content></ng-content>
+</md-input>
+<md-card *ngIf="popupVisible">
+  <md-list>
+    <md-list-item *ngFor="let item of matches" (mousedown)="select(item)">
+      <p>{{item[itemText]}}</p>
+      <md-divider></md-divider>
+    </md-list-item>
+  </md-list>
+</md-card>
