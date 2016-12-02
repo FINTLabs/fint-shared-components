@@ -24,6 +24,7 @@ export interface IEvents {
   event: IEvent;
   events?: IEvent[];
   isOpen?: boolean;
+  showDetail?: boolean;
 }
 
 @Injectable()

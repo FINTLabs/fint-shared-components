@@ -17,7 +17,7 @@ export class EventFilterPipe implements PipeTransform {
         return item.corrId.toLowerCase().indexOf(search.toLowerCase()) !== -1
           || item.source.toLowerCase().indexOf(search.toLowerCase()) !== -1
           || item.event.client.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          || item.event.verb.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          || (item.event.verb ? item.event.verb.toLowerCase().indexOf(search.toLowerCase()) !== -1 : false)
           || item.event.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
           || time.indexOf(search.toLowerCase()) !== -1;
       }
