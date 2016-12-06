@@ -114,7 +114,7 @@ export class EventsComponent implements OnInit {
       while (word = words.pop()) {
         line.push(word);
         tspan.text(line.join(' '));
-        if (tspan.node().getComputedTextLength() > width) {
+        if ((<SVGTextContentElement>tspan.node()).getComputedTextLength() > width) {
           line.pop();
           tspan.text(line.join(' '));
           line = [word];
