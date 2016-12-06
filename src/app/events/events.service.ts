@@ -33,9 +33,11 @@ export class EventService {
 
   all(): Observable<IEvents[]> {
     return this.http
-      .get('https://api.felleskomponent.no/audit/events')
+      .get('https://api.felleskomponent.no/audit/events?pageSize=999999')
       .map((res: Response) => {
-        return map(groupBy(res.json(), (event: IEvents) => event.corrId), corr => {
+        let result = res.json();
+        let eventList = result._embedded.mongoAuditEventList;
+        return map(groupBy(eventList, (event: IEvents) => event.corrId), corr => {
           let events = map(corr, (e: IEvents) => e.event);
           return {
             corrId: corr[0].corrId,
