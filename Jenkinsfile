@@ -13,8 +13,8 @@ node {
     }
 
     stage('Building portals') {
-      build '../fint-adminportal-mockups/${env.BRANCH_NAME}'
-      build '../fint-kundeportal-mockups/${env.BRANCH_NAME}'
+      build job: "../fint-adminportal-mockups/${env.BRANCH_NAME}", parameters: [string(name: 'RUN_TYPE', value: 'triggered')]
+      build job: "../fint-kundeportal-mockups/${env.BRANCH_NAME}", parameters: [string(name: 'RUN_TYPE', value: 'triggered')]
     }
   }
 
