@@ -1,0 +1,76 @@
+:host /deep/ {
+  display: block;
+  svg {
+    max-width: 600px;
+    fill: none;
+    stroke: none;
+    stroke-linecap: square;
+    stroke-miterlimit: 10;
+    #downstream_direction, #upstream_direction {
+      fill: #cfe2f3;
+      text {
+        letter-spacing: 0.5em;
+      }
+    }
+    #downstream_direction text { transform: rotateZ(90deg); }
+    #upstream_direction text { transform: rotateZ(-90deg); }
+
+    #Cache_DB {
+      opacity: 0.3;
+      &.active {
+        opacity: 1;
+      }
+    }
+    #downstream .stream > use { fill: #6aa84f; }
+    #upstream .stream > use { fill: #3d85c6; }
+
+    text {
+      fill: #000000;
+      font-family: Arial;
+      font-size: 1.15em;
+    }
+    .descission {
+      fill: #f1c232;
+      opacity: 1;
+    }
+    .link {
+      stroke: #000000;
+      stroke-width: 1.0;
+      stroke-linejoin: round;
+      stroke-linecap: butt;
+    }
+
+    /** Stream and error boxes */
+    .stream, .error {
+      &.active {
+        cursor: pointer;
+        &:hover {
+          > use  { transform: scale(1.2); }
+          > text { transform-origin: center; transform: translate(-10px, -10px) scale(1.4); }
+        }
+      }
+      text, use {
+        transition: transform 0.2s ease-out;
+      }
+      text {
+        font-family: Monospace;
+        font-size: 0.7em;
+      }
+    }
+    .stream {
+      > use { opacity: 0.2; }
+      &.active > use { opacity: 1; }
+    }
+    #downstream { .stream, .error { > use { transform-origin: 30px 50px; } }}
+    #upstream   { .stream, .error { > use { transform-origin: 20px 30px; } }}
+
+    .error {
+      opacity: 0;
+      &.active {
+        opacity: 1;
+      }
+      text  { fill: #ffffff; }
+      > use { fill: #cc0000; }
+    }
+  }
+}
