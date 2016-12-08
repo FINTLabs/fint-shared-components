@@ -12,11 +12,13 @@ import { EventService } from './events.service';
 // Components
 import { EventsComponent } from './events.component';
 import { EventFilterPipe } from './events-filter.pipe';
+import { EventFlowComponent } from './event-flow/event-flow.component';
 
 @NgModule({
   declarations: [
     EventsComponent,
-    EventFilterPipe
+    EventFilterPipe,
+    EventFlowComponent
   ],
   imports: [
     CommonModule,
