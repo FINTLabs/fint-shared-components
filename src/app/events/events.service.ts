@@ -5,27 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { map, groupBy } from 'lodash';
-
-export interface IEvent {
-  corrId: string;
-  verb: string;
-  status: string;
-  time: number;
-  orgId: string;
-  source: string;
-  client: string;
-  data: string[];
-}
-export interface IEvents {
-  corrId: string;
-  source: string;
-  orgId: string;
-  timestamp: number;
-  event: IEvent;
-  events?: IEvent[];
-  isOpen?: boolean;
-  showDetail?: boolean;
-}
+import { IEvents } from './model';
 
 @Injectable()
 export class EventService {

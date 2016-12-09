@@ -1,8 +1,7 @@
-import { ViewChild } from '@angular/core/src/metadata/di';
-import { IEvent, IEvents } from '../events.service';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as D3 from '../../d3.bundle';
 import { each, map } from 'lodash';
+import { IEvent, IEvents } from '../model';
 
 @Component({
   selector: 'fint-event-flow',

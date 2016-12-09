@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { each } from 'lodash';
 
 import { EventFilterPipe } from './events-filter.pipe';
-import { EventService, IEvent, IEvents } from './events.service';
+import { EventService } from './events.service';
+import { IEvent, IEvents } from './model';
 
 @Component({
   selector: 'fint-events',
