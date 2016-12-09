@@ -13,8 +13,10 @@ import 'rxjs/add/observable/from';
 import { LibSharedModule } from '../shared/shared.module';
 import { EventRoutes } from './events.routes';
 
-import { IEvents, EventService } from './events.service';
+import { EventService } from './events.service';
 import { EventsComponent } from './events.component';
+import { IEvent, IEvents } from './model';
+
 
 class EventServiceStub {
   all(): Observable<IEvents[]> {
