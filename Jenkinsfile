@@ -13,8 +13,10 @@ node {
     }
 
     stage('Building portals') {
-      node { build job: "../fint-adminportal-mockups/${env.BRANCH_NAME}", parameters: [string(name: 'RUN_TYPE', value: 'triggered')] }
-      node { build job: "../fint-kundeportal-mockups/${env.BRANCH_NAME}", parameters: [string(name: 'RUN_TYPE', value: 'triggered')] }
+      paralell(
+        build job: "../fint-adminportal-mockups/${env.BRANCH_NAME}", parameters: [string(name: 'RUN_TYPE', value: 'triggered')]
+        build job: "../fint-kundeportal-mockups/${env.BRANCH_NAME}", parameters: [string(name: 'RUN_TYPE', value: 'triggered')]
+      )
     }
   }
 
