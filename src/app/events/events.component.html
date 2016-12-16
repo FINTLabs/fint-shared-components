@@ -39,7 +39,24 @@
             <div class="flow-container">
               <fint-event-flow [event]="event" (onOpen)="showDetail($event)"></fint-event-flow>
               <div *ngIf="activeEvent">
-                <pre>{{ activeEvent | json }}</pre>
+                <dl>
+                  <dt>Action</dt>
+                  <dd>{{activeEvent.action}}</dd>
+                  <dt>Status</dt>
+                  <dd>{{activeEvent.status}}</dd>
+                  <dt>Time</dt>
+                  <dd>{{activeEvent.time | utcDate}}</dd>
+                  <dt>OrgId</dt>
+                  <dd>{{activeEvent.orgId}}</dd>
+                  <dt>Source</dt>
+                  <dd>{{activeEvent.source}}</dd>
+                  <dt>Client</dt>
+                  <dd>{{activeEvent.client}}</dd>
+                  <dt>Message</dt>
+                  <dd>{{activeEvent.message}}</dd>
+                  <dt>Data</dt>
+                  <dd>{{activeEvent.data.join(' ')}}</dd>
+                </dl>
               </div>
             </div>
           </td>

@@ -26,9 +26,19 @@ tbody {
         flex: 1;
       }
     }
-    pre {
+    dl {
       margin-left: 2rem;
       text-align: left;
+      dt {
+        float: left;
+        font-weight: bold;
+        text-align: right;
+        display: inline-block;
+        width: 60px;
+      }
+      dd {
+        margin-left: 70px;
+      }
     }
   }
 }
