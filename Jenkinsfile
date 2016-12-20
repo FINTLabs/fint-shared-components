@@ -14,7 +14,7 @@ node {
 
     stage('Building portals') {
       build job: "../fint-admin-portal/${env.BRANCH_NAME}", parameters: [string(name: 'RUN_TYPE', value: 'triggered')]
-      build job: "../fint-kundeportal-mockups/${env.BRANCH_NAME}", parameters: [string(name: 'RUN_TYPE', value: 'triggered')]
+      build job: "../fint-kunde-portal/${env.BRANCH_NAME}", parameters: [string(name: 'RUN_TYPE', value: 'triggered')]
     }
   }
 
