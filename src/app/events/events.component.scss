@@ -29,6 +29,9 @@ tbody {
     dl {
       margin-left: 2rem;
       text-align: left;
+      dt, dd {
+        padding-top: 5px;
+      }
       dt {
         float: left;
         font-weight: bold;
