@@ -1,7 +1,7 @@
 import { TypeaheadComponent } from './typeahead';
 import { FlipCardComponent } from './flip-card/flip-card.component';
 // Modules
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 
@@ -42,4 +42,10 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     UtcDatePipe
   ]
 })
-export class LibSharedModule { }
+export class LibSharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: LibSharedModule
+    }
+  }
+}

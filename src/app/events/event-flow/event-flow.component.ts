@@ -15,6 +15,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
   private host;
   private pathFunction;
   private lineFunction;
+  private paths;
 
   constructor() { }
 
@@ -30,7 +31,17 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     this.host.attr('viewBox', '0.0 0.0 ' + width + ' ' + height);
     this.pathFunction = D3.line().x(d => d[0]).y(d => d[1]).curve(D3.curveLinearClosed);
     this.lineFunction = D3.line().x(d => d[0]).y(d => d[1]).curve(D3.curveLinear);
-
+    this.paths = {
+      downstream: {
+        stream: this.pathFunction([[0, 0], [0, 50], [30, 80], [60, 50], [60, 0]]),
+        error: this.pathFunction([[0, 0], [0, 50], [25, 80], [50, 50], [50, 0]])
+      },
+      upstream: {
+        stream: this.pathFunction([[0, 30], [0, 80], [60, 80], [60, 30], [30, 0]]),
+        error: this.pathFunction([[0, 30], [0, 80], [50, 80], [50, 30], [25, 0]]),
+        long: this.pathFunction([[0, 30], [0, 120], [60, 120], [60, 30], [30, 0]])
+      }
+    };
     let eventConfig = {
       downstream: [
         { id: 'NEW', type: 'stream', x: 219, y: 69 },
@@ -71,11 +82,11 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     this.host.append('defs')
       .selectAll('path')
       .data([
-        { id: 'downstream_arrow', d: this.pathFunction([[0, 0], [0, 50], [30, 80], [60, 50], [60, 0]]) },
-        { id: 'downstream_error', d: this.pathFunction([[0, 0], [0, 50], [25, 80], [50, 50], [50, 0]]) },
-        { id: 'upstream_arrow', d: this.pathFunction([[0, 30], [0, 80], [60, 80], [60, 30], [30, 0]]) },
-        { id: 'upstream_error', d: this.pathFunction([[0, 30], [0, 80], [50, 80], [50, 30], [25, 0]]) },
-        { id: 'upstream_long_arrow', d: this.pathFunction([[0, 30], [0, 120], [60, 120], [60, 30], [30, 0]]) },
+        { id: 'downstream_arrow', d: this.paths.downstream.stream },
+        { id: 'downstream_error', d: this.paths.downstream.error },
+        { id: 'upstream_arrow', d: this.paths.upstream.stream },
+        { id: 'upstream_error', d: this.paths.upstream.error },
+        { id: 'upstream_long_arrow', d: this.paths.upstream.long },
         { id: 'descission', d: 'm0 0l27 -16l27 16l-27 16z' },
         { id: 'descission_small', d: 'm0 0l12 -9l12 9l-12 9z' }
       ])
@@ -141,7 +152,8 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
   private renderStreamGroup(container, direction: string, state, lineHeight: number) {
     let stateGroup = this.createGroup(container, state.id, state.x, state.y)
       .attr('class', state.type + (this.isActive([state.id], true) ? ' active' : ''));
-    stateGroup.append('use').attr('xlink:href', this.getXLinkType(direction, state));
+    // stateGroup.append('use').attr('xlink:href', this.getXLinkType(direction, state));
+    stateGroup.append('path').attr('d', this.getXLinkType(direction, state));
     this.centerText(stateGroup, state.id, lineHeight).call(this.wrap, (state.type === 'stream' ? 60 : 50), true);
     stateGroup.on('click', evt => this.showDetail(state.id));
 
@@ -158,9 +170,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
   }
 
   private getXLinkType(direction: string, state) {
-    return '#' + direction
-      + (state.arrowType ? '_' + state.arrowType : '')
-      + (state.type === 'stream' ? '_arrow' : '_error');
+    return this.paths[direction][(state.arrowType ? state.arrowType : state.type)];
   }
 
   private createGroup(elm, id, x, y) {
