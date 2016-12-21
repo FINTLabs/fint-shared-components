@@ -2,6 +2,8 @@
   display: block;
   svg {
     max-width: 600px;
+    width: 100%;
+    min-width: 400px;
     fill: none;
     stroke: none;
     stroke-linecap: square;
@@ -12,8 +14,16 @@
         letter-spacing: 0.5em;
       }
     }
-    #downstream_direction text { transform: rotateZ(90deg); }
-    #upstream_direction text { transform: rotateZ(-90deg); }
+
+    // Will not rotate on IE due to: https://connect.microsoft.com/IE/feedback/details/811744/ie11-bug-with-implementation-of-css-transforms-in-svg
+    #downstream_direction text {
+      -ms-transform: rotateZ(90deg);
+      transform: rotateZ(90deg);
+    }
+    #upstream_direction text {
+      -ms-transform: rotateZ(-90deg);
+      transform: rotateZ(-90deg);
+    }
 
     #Cache_DB {
       opacity: 0.3;
@@ -21,8 +31,8 @@
         opacity: 1;
       }
     }
-    #downstream .stream > use { fill: #6aa84f; }
-    #upstream .stream > use { fill: #3d85c6; }
+    #downstream .stream {> use, > path { fill: #6aa84f; }}
+    #upstream .stream {> use, > path { fill: #3d85c6; }}
 
     text {
       fill: #000000;
@@ -44,12 +54,13 @@
     .stream, .error {
       &.active {
         cursor: pointer;
+        > text { transform-origin: 8px 0px; }
         &:hover {
-          > use  { transform: scale(1.2); }
-          > text { transform-origin: center; transform: translate(-10px, -10px) scale(1.4); }
+          > path, > use  { transform: scale(1.2); }
+          > text { transform: translate(-10px, -10px) scale(1.4); }
         }
       }
-      text, use {
+      text, path, use {
         transition: transform 0.2s ease-out;
       }
       text {
@@ -58,11 +69,11 @@
       }
     }
     .stream {
-      > use { opacity: 0.2; }
-      &.active > use { opacity: 1; }
+      > use, > path { opacity: 0.2; }
+      &.active {> use, > path { opacity: 1; }}
     }
-    #downstream { .stream, .error { > use { transform-origin: 30px 50px; } }}
-    #upstream   { .stream, .error { > use { transform-origin: 20px 30px; } }}
+    #downstream { .stream, .error { > use, > path { transform-origin: 30px 50px; } }}
+    #upstream   { .stream, .error { > use, > path { transform-origin: 20px 30px; } }}
 
     .error {
       opacity: 0;
@@ -70,7 +81,12 @@
         opacity: 1;
       }
       text  { fill: #ffffff; }
-      > use { fill: #cc0000; }
+      > use, > path { fill: #cc0000; }
     }
   }
+}
+
+// Browser hacks using cssuseragent
+.ua-ie :host /deep/ svg {
+  height: 510px;
 }

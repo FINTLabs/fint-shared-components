@@ -35,7 +35,6 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
 })
 export class EventModule {
   static forRoot(): ModuleWithProviders {
-
     return {
       ngModule: EventModule,
       providers: [EventService]
