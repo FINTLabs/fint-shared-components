@@ -1,6 +1,6 @@
 import { LibSharedModule } from '../shared/shared.module';
 // Modules
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -33,4 +33,12 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
   ],
   providers: [EventService]
 })
-export class EventModule { }
+export class EventModule {
+  static forRoot(): ModuleWithProviders {
+
+    return {
+      ngModule: EventModule,
+      providers: [EventService]
+    }
+  }
+}

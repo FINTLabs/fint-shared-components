@@ -20,7 +20,7 @@ describe('FlipCardComponent', () => {
       ],
       declarations: [FlipCardComponent, FaComponent]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {

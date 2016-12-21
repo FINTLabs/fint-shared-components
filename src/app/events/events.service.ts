@@ -33,7 +33,7 @@ export class EventService {
       .catch(this.handleError);
   }
 
-  protected handleError(error: Response | any): ErrorObservable {
+  protected handleError(error: Response | any): ErrorObservable<any> {
     // In a real world app, we might use a remote logging infrastructure
     let errMsg: string;
     if (error instanceof Response) {
