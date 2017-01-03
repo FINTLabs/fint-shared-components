@@ -6,16 +6,17 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { map, groupBy } from 'lodash';
-import { IEvents } from './model';
+import { IEventsHALPage } from './model';
 
 @Injectable()
 export class EventService {
   constructor(private http: Http) { }
 
-  all(): Observable<IEvents[]> {
+  all(): Observable<IEventsHALPage> {
     return this.http
-      .get('https://api.felleskomponent.no/audit/events?pageSize=999999')
-      .map((res: Response) => {
+      .get('https://api.felleskomponent.no/audit/events')
+      .map((res: Response) => res.json()
+      /*{
         let result = res.json();
         let eventList = result._embedded.mongoAuditEventList;
         return map(groupBy(eventList, (event: IEvents) => event.corrId), corr => {
@@ -29,7 +30,7 @@ export class EventService {
             events: events
           };
         });
-      })
+      }*/)
       .catch(this.handleError);
   }
 

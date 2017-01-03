@@ -64,7 +64,7 @@ export class TypeaheadComponent implements ControlValueAccessor, AfterContentIni
 
   onEnter() {
     this.setMatches();
-    this.popupVisible = true;
+    this.popupVisible = this.matches.length > 0;
   }
 
   onLeave() {
@@ -87,9 +87,13 @@ export class TypeaheadComponent implements ControlValueAccessor, AfterContentIni
     if (this.value) {
       let m = this.getMatches(this.items, this.value, this.itemText);
       if (m instanceof Observable) {
-        m.subscribe(res => this.matches = res);
+        m.subscribe(res => {
+          this.matches = res;
+          this.popupVisible = this.matches.length > 0;
+        });
       } else {
         this.matches = m;
+        this.popupVisible = this.matches.length > 0;
       }
     } else {
       this.matches = this.items;

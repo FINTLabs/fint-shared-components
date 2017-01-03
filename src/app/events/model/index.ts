@@ -19,3 +19,12 @@ export interface IEvents {
   isOpen?: boolean;
   showDetail?: boolean;
 }
+
+export interface IEventsHALPage {
+  total: number;
+  page: number;
+  pageSize: number;
+  _embedded: {
+    mongoAuditEventList: IEvents[]
+  }
+}

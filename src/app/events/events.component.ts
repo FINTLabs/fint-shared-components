@@ -4,7 +4,7 @@ import { each } from 'lodash';
 
 import { EventFilterPipe } from './events-filter.pipe';
 import { EventService } from './events.service';
-import { IEvent, IEvents } from './model';
+import { IEventsHALPage, IEvent, IEvents } from './model';
 
 @Component({
   selector: 'fint-events',
@@ -33,10 +33,10 @@ export class EventsComponent implements OnInit {
   }
 
   constructor(private EventService: EventService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) {
-    EventService.all().subscribe((events: IEvents[]) => {
-      this.total = events.length;
-      this.events = events;
-      this.filteredEvents = events;
+    EventService.all().subscribe((result: IEventsHALPage) => {
+      this.total = result.total;
+      this.events = result._embedded.mongoAuditEventList;
+      this.filteredEvents = this.events;
       this.route.params.subscribe(params => {
         if (params['search?']) {
           this.searchstring = params['search?'];
