@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import { TypeaheadComponent } from './typeahead';
 import { FlipCardComponent } from './flip-card/flip-card.component';
 // Modules
@@ -9,6 +10,9 @@ import { MaterialModule } from '@angular/material';
 import { PagerComponent } from './pager/pager.component';
 import { FaStackComponent } from './fontawesome/fa-stack.component';
 import { FaComponent } from './fontawesome/fa.component';
+import { ConfirmDeleteComponent } from './dialogs/confirm-delete/confirm-delete.component';
+import { ErrorComponent } from './dialogs/error/error.component';
+import { FintDialogService } from './dialogs/fint-dialog.service';
 
 // Pipes
 import { UtcDatePipe } from './pipes/utc-date.pipe';
@@ -22,13 +26,17 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     FlipCardComponent,
     TypeaheadComponent,
 
+    ConfirmDeleteComponent,
+    ErrorComponent,
+
     // Pipes
     HighlightPipe,
     UtcDatePipe
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    HttpModule
   ],
   exports: [
     FaComponent,
@@ -40,7 +48,9 @@ import { HighlightPipe } from './pipes/highlight.pipe';
     // Pipes
     HighlightPipe,
     UtcDatePipe
-  ]
+  ],
+  entryComponents: [ConfirmDeleteComponent, ErrorComponent],
+  providers: [FintDialogService]
 })
 export class LibSharedModule {
   static forRoot(): ModuleWithProviders {

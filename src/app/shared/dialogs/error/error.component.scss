@@ -1,0 +1,18 @@
+$accent: #cf202e;
+$text-color: #333;
+
+:host {
+  position: relative;
+  display: block;
+}
+h1, em {
+  color: $accent;
+}
+.subtitle {
+  color: $text-color;
+}
+
+.path {
+  margin-top: -22px;
+  color: cornflowerblue;
+}
