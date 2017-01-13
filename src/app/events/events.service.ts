@@ -6,15 +6,17 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { map, groupBy } from 'lodash';
+
+import { FintDialogService } from '../shared';
 import { IEventsHALPage } from './model';
 
 @Injectable()
 export class EventService {
-  constructor(private http: Http) { }
+  constructor(private http: Http, private fintDialog: FintDialogService) { }
 
-  all(): Observable<IEventsHALPage> {
+  all(page: number = 1, search?: string): Observable<IEventsHALPage> {
     return this.http
-      .get('https://api.felleskomponent.no/audit/events')
+      .get(`https://api.felleskomponent.no/audit/events?page=${page}&pageSize=10`)
       .map((res: Response) => res.json()
       /*{
         let result = res.json();
@@ -31,20 +33,11 @@ export class EventService {
           };
         });
       }*/)
-      .catch(this.handleError);
+      .catch(error => this.handleError(error));
   }
 
-  protected handleError(error: Response | any): ErrorObservable<any> {
-    // In a real world app, we might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
+  handleError(error) {
+    this.fintDialog.displayHttpError(error);
+    return Observable.throw(error);
   }
 }

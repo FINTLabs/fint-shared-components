@@ -13,6 +13,9 @@ md-card-content app-pager {
 }
 
 tbody {
+  &.loading {
+    opacity: 0.3;
+  }
   tr:first-child td {
     cursor: pointer;
   }

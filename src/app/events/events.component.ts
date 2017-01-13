@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { each } from 'lodash';
@@ -13,39 +14,65 @@ import { IEventsHALPage, IEvent, IEvents } from './model';
 })
 export class EventsComponent implements OnInit {
   events: IEvents[];
-  filteredEvents: IEvents[];
   activeEvent: IEvent;
-  start: number = 0;
-  end: number = 10;
-  total: number = 0;
-  current: number = 0;
+  isLoading: boolean = false;
 
-  private filter = new EventFilterPipe();
+  // Pager config
+  pages: number;
+  itemsPerPage: number;
+  total: number;
+  _current: number; // Current page
+  get current() { return this._current; }
+  set current(val: number) {
+    if (val != this._current) {
+      this._current = val;
+      this.loadEvents(this._current);
+    }
+  }
+
   _searchstring: string;
   get searchstring() { return this._searchstring; }
   set searchstring(value) {
-    this._searchstring = value;
-    this.current = 0;
-    this.filteredEvents = this.filter.transform(this.events, value);
-    this.total = this.filteredEvents.length;
-    this.cdr.detectChanges();
-    this.router.navigate(['/events', value]);
+    if (this._searchstring != value) {
+      this._searchstring = value;
+      this._current = 1; // Reset pager
+      this.loadEvents(this._current);
+    }
   }
 
-  constructor(private EventService: EventService, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) {
-    EventService.all().subscribe((result: IEventsHALPage) => {
-      this.total = result.total;
-      this.events = result._embedded.mongoAuditEventList;
-      this.filteredEvents = this.events;
-      this.route.params.subscribe(params => {
-        if (params['search?']) {
-          this.searchstring = params['search?'];
-        }
-      });
-    });
+  constructor(private EventService: EventService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Hendelser | Fint');
   }
 
   ngOnInit() {
+    // Set initial page and load data
+    this.current = 1;
+
+    // Search filter
+    this.route.params.subscribe(params => {
+      if (params['search?']) {
+        this.searchstring = params['search?'];
+      }
+    });
+  }
+
+  loadEvents(page: number = 1) {
+    this.isLoading = true;
+    this.EventService.all(page, this.searchstring).subscribe((result: IEventsHALPage) => {
+      this.isLoading = false;
+      // Pager data
+      this.total = result.total_items;
+      this.itemsPerPage = result.page_size;
+      this.current = result.page;
+      this.pages = result.page_count;
+
+      // View data
+      this.events = result._embedded.mongoAuditEventList;
+    });
   }
 
   openEvent(event: IEvents) {

@@ -12,7 +12,7 @@
     </md-input>
   </md-card-title>
   <md-card-content class="table-container" *ngIf="events">
-    <fint-pager [(start)]="start" [(end)]="end" [total]="total" [(current)]="current"></fint-pager>
+    <fint-pager [total]="pages" [(page)]="current"></fint-pager>
     <table>
       <thead>
         <tr>
@@ -25,7 +25,7 @@
         </tr>
       </thead>
 
-      <tbody *ngFor="let event of filteredEvents | slice:start:end;">
+      <tbody *ngFor="let event of events" [ngClass]="{'loading': isLoading}">
         <tr (click)="openEvent(event)">
           <td [innerHTML]="event.corrId | highlight:searchstring"></td>
           <td [innerHTML]="event.source | highlight:searchstring"></td>
@@ -34,7 +34,7 @@
           <td [innerHTML]="event.event.client | highlight:searchstring"></td>
           <td [innerHTML]="event.event.time | utcDate | highlight:searchstring"></td>
         </tr>
-        <tr *ngIf="event.isOpen || filteredEvents.length === 1">
+        <tr *ngIf="event.isOpen || events.length === 1">
           <td colspan="6" [className]="event.showDetail ? 'detail-view' : ''">
             <div class="flow-container">
               <fint-event-flow [event]="event" (onOpen)="showDetail($event)"></fint-event-flow>
@@ -65,6 +65,6 @@
     </table>
   </md-card-content>
   <md-card-actions>
-    <fint-pager [(start)]="start" [(end)]="end" [total]="total" [(current)]="current"></fint-pager>
+    <fint-pager [total]="pages" [(page)]="current"></fint-pager>
   </md-card-actions>
 </md-card>

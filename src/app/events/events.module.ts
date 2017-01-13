@@ -18,6 +18,7 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
   declarations: [
     EventsComponent,
     EventFilterPipe,
+    EventFlowComponent,
     EventFlowComponent
   ],
   imports: [
