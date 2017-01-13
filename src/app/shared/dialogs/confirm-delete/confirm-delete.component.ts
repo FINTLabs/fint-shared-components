@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'app-confirm-delete',
+  selector: 'fint-confirm-delete',
   templateUrl: './confirm-delete.component.html',
   styleUrls: ['./confirm-delete.component.scss']
 })

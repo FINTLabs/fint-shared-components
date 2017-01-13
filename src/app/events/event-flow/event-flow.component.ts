@@ -24,9 +24,9 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    let me = this;
-    let width = 610;
-    let height = 570;
+    const me = this;
+    const width = 610;
+    const height = 570;
     this.host = D3.select(this.svg.nativeElement);
     this.host.attr('viewBox', '0.0 0.0 ' + width + ' ' + height);
     this.pathFunction = D3.line().x(d => d[0]).y(d => d[1]).curve(D3.curveLinearClosed);
@@ -42,7 +42,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
         long: this.pathFunction([[0, 30], [0, 120], [60, 120], [60, 30], [30, 0]])
       }
     };
-    let eventConfig = {
+    const eventConfig = {
       downstream: [
         { id: 'NEW', type: 'stream', x: 219, y: 69 },
         { id: 'CACHE', type: 'stream', x: 219, y: 230 },
@@ -95,31 +95,31 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
       .attrs({ id: p => p.id, d: p => p.d });
 
     // Create main canvas
-    let container = this.host.append('g');
+    const container = this.host.append('g');
 
     // Create up-/down stream arrow paths
-    let aw = 60; let ah = 570; let p = 15;
-    let downstreamArrow = me.createGroup(container, 'downstream_direction', 0, 0);
+    const aw = 60, ah = 570, p = 15;
+    const downstreamArrow = me.createGroup(container, 'downstream_direction', 0, 0);
     me.createPath(downstreamArrow, [[p, 0], [aw - p, 0], [aw - p, ah - 30], [aw, ah - 30], [(aw / 2), ah], [0, ah - 30], [p, ah - 30]]);
     downstreamArrow.append('text').attrs({ x: 160, y: -25 }).text('Downstream');
 
-    let upstreamArrow = me.createGroup(container, 'upstream_direction', (width - 60), 0);
+    const upstreamArrow = me.createGroup(container, 'upstream_direction', (width - 60), 0);
     me.createPath(upstreamArrow, [[(aw / 2), 0], [aw, 30], [aw - p, 30], [aw - p, ah], [p, ah], [p, 30], [0, 30]]);
     upstreamArrow.append('text').attrs({ x: -305, y: 35 }).text('Upstream');
 
     // Client / provider boxes
-    let boxWidth = 365; let boxHeight = 44;
-    let clientCacheService = me.createGroup(container, 'Client_CacheService', ((width - boxWidth) / 2), 0);
+    const boxWidth = 365, boxHeight = 44;
+    const clientCacheService = me.createGroup(container, 'Client_CacheService', ((width - boxWidth) / 2), 0);
     clientCacheService.append('rect').attrs({ 'width': boxWidth, 'height': boxHeight, 'fill': '#ff9900' });
     me.centerText(clientCacheService, 'Client: ' + me.event.event.client, 2.2);
 
-    let providerService = me.createGroup(container, 'Provider', ((width - boxWidth) / 2), (height - (boxHeight * 2)));
+    const providerService = me.createGroup(container, 'Provider', ((width - boxWidth) / 2), (height - (boxHeight * 2)));
     providerService.append('rect').attrs({ 'width': boxWidth, 'height': boxHeight, 'fill': '#666666' });
     me.centerText(providerService, 'Provider', 2.2).attr('style', 'fill: #d9d9d9');
 
     // Cache DB
-    let cacheDBWidth = 141;
-    let cacheDB = me.createGroup(container, 'Cache_DB', ((width - cacheDBWidth) / 2), 345)
+    const cacheDBWidth = 141;
+    const cacheDB = me.createGroup(container, 'Cache_DB', ((width - cacheDBWidth) / 2), 345)
       .attr('class', me.isActive(['CACHE', 'CACHE_RESPONSE']) ? 'active' : '');
     cacheDB.append('path').attrs({ fill: '#b7b7b7', d: 'm0 0l0 0c0 -12 32 -22 72 -22c40 0 72 10 72 22l0 90c0 12 -32 22 -72 22c-40 0 -72 -10 -72 -22z' });
     cacheDB.append('path').attrs({
@@ -129,8 +129,8 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     me.centerText(cacheDB, 'Cache', 2.4);
 
     // Render downstream
-    let downstream = me.createGroup(container, 'downstream', 0, 0);
-    let downPath = me.createGroup(downstream, null, 165, 0).attr('class', 'pathLink');
+    const downstream = me.createGroup(container, 'downstream', 0, 0);
+    const downPath = me.createGroup(downstream, null, 165, 0).attr('class', 'pathLink');
     downPath.append('path')
       .attrs({ d: me.isActive(['NEW', 'CACHE'], true) ? 'm84 147l0 85' : 'm84 147l0 44l-75 0l0 40', class: 'link' });
     downPath.append('use').attrs({
@@ -139,8 +139,8 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     each(eventConfig.downstream, state => me.renderStreamGroup(downstream, 'downstream', state, 6));
 
     // Render upstream
-    let upstream = me.createGroup(container, 'upstream', 0, 0);
-    let upPath = me.createGroup(upstream, null, 275, 0).attr('class', 'pathLink');
+    const upstream = me.createGroup(container, 'upstream', 0, 0);
+    const upPath = me.createGroup(upstream, null, 275, 0).attr('class', 'pathLink');
     upPath.append('path')
       .attrs({ d: me.isActive(['CACHE_RESPONSE', 'SENT_TO_CLIENT'], true) ? 'm80 147l0 83' : 'm80 147l0 44l87 0l0 41', class: 'link' });
     upPath.append('use').attrs({
@@ -150,7 +150,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
   }
 
   private renderStreamGroup(container, direction: string, state, lineHeight: number) {
-    let stateGroup = this.createGroup(container, state.id, state.x, state.y)
+    const stateGroup = this.createGroup(container, state.id, state.x, state.y)
       .attr('class', state.type + (this.isActive([state.id], true) ? ' active' : ''));
     // stateGroup.append('use').attr('xlink:href', this.getXLinkType(direction, state));
     stateGroup.append('path').attr('d', this.getXLinkType(direction, state));
@@ -159,7 +159,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
 
     // Render links if present and active
     if (state.linkTo && this.isActive(state.linkTo.ids, true)) {
-      let errorLink = stateGroup.append('g').attrs({ class: 'errorLink' });
+      const errorLink = stateGroup.append('g').attrs({ class: 'errorLink' });
       errorLink.append('path').attrs({ d: this.lineFunction(state.linkTo.path), class: 'link' });
       errorLink.append('use').attrs({
         'xlink:href': '#descission_small',
@@ -194,15 +194,15 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
 
   private wrap(textElm, width, center: boolean) {
     function calcCenter(d) {
-      let len = this.getComputedTextLength();
+      const len = this.getComputedTextLength();
       if (len < width) {
         return (width - len) / 2;
       }
       return 0;
     }
     textElm.each(function () {
-      let text = D3.select(this);
-      let words = text.text().split(/_/);
+      const text = D3.select(this);
+      const words = text.text().split(/_/);
       let lineNumber = 0;
       text.text(null).selectAll('tspan')
         .data(words)
@@ -214,7 +214,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
   }
 
   isActive(status: string[], requireAll?: boolean) {
-    let details = this.getDetail(status);
+    const details = this.getDetail(status);
     return (requireAll ? details.length === status.length : details.length);
   }
 
@@ -224,7 +224,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
   }
 
   showDetail(name: string) {
-    let activeEvent = this.getDetail([name]);
+    const activeEvent = this.getDetail([name]);
     if (activeEvent.length) {
       this.onOpen.emit({ eventDetail: this.getDetail([name])[0], event: this.event });
     }

@@ -1,3 +1,4 @@
+import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
@@ -13,7 +14,7 @@ export class FintDialogService {
     console.error(error);
     const body = error.json() || '';
     const err = body.message || JSON.stringify(body);
-    let errorDialogRef = this.dialog.open(ErrorComponent);
+    const errorDialogRef = this.dialog.open(ErrorComponent);
     errorDialogRef.componentInstance.errorSubtitle = `${error.status} ${'- ' + error.statusText || ''}`;
     errorDialogRef.componentInstance.path = body.path;
     errorDialogRef.componentInstance.errorMessage = err;

@@ -1,19 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'app-error',
+  selector: 'fint-error',
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.scss']
 })
-export class ErrorComponent implements OnInit {
-  errorMessage: any;
-  errorSubtitle: string;
-  path: string;
+export class ErrorComponent {
+  errorMessage: string = '';
+  errorSubtitle: string = '';
+  path: string = '';
 
-  constructor(public dialogRef: MdDialogRef<ErrorComponent>) { }
-
-  ngOnInit() {
-  }
-
+  constructor(private dialogRef: MdDialogRef<ErrorComponent>) { }
 }
