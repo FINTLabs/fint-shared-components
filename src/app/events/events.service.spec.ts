@@ -1,9 +1,11 @@
+/* tslint:disable:no-unused-variable */
+import { TestBed, async, inject } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 import { ConnectionBackend, Http, BaseRequestOptions } from '@angular/http';
-/* tslint:disable:no-unused-variable */
+import { MdDialog } from '@angular/material';
 
-import { TestBed, async, inject } from '@angular/core/testing';
 import { EventService } from './events.service';
+import { FintDialogService } from '../shared/dialogs';
 
 describe('Service: Events', () => {
   beforeEach(() => {
@@ -16,7 +18,9 @@ describe('Service: Events', () => {
         },
         MockBackend,
         BaseRequestOptions,
-        EventService
+        EventService,
+        MdDialog,
+        FintDialogService,
       ]
     });
   });

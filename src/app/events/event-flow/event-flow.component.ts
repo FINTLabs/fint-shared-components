@@ -99,54 +99,54 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
 
     // Create up-/down stream arrow paths
     const aw = 60, ah = 570, p = 15;
-    const downstreamArrow = me.createGroup(container, 'downstream_direction', 0, 0);
-    me.createPath(downstreamArrow, [[p, 0], [aw - p, 0], [aw - p, ah - 30], [aw, ah - 30], [(aw / 2), ah], [0, ah - 30], [p, ah - 30]]);
+    const downstreamArrow = this.createGroup(container, 'downstream_direction', 0, 0);
+    this.createPath(downstreamArrow, [[p, 0], [aw - p, 0], [aw - p, ah - 30], [aw, ah - 30], [(aw / 2), ah], [0, ah - 30], [p, ah - 30]]);
     downstreamArrow.append('text').attrs({ x: 160, y: -25 }).text('Downstream');
 
-    const upstreamArrow = me.createGroup(container, 'upstream_direction', (width - 60), 0);
-    me.createPath(upstreamArrow, [[(aw / 2), 0], [aw, 30], [aw - p, 30], [aw - p, ah], [p, ah], [p, 30], [0, 30]]);
+    const upstreamArrow = this.createGroup(container, 'upstream_direction', (width - 60), 0);
+    this.createPath(upstreamArrow, [[(aw / 2), 0], [aw, 30], [aw - p, 30], [aw - p, ah], [p, ah], [p, 30], [0, 30]]);
     upstreamArrow.append('text').attrs({ x: -305, y: 35 }).text('Upstream');
 
     // Client / provider boxes
     const boxWidth = 365, boxHeight = 44;
-    const clientCacheService = me.createGroup(container, 'Client_CacheService', ((width - boxWidth) / 2), 0);
+    const clientCacheService = this.createGroup(container, 'Client_CacheService', ((width - boxWidth) / 2), 0);
     clientCacheService.append('rect').attrs({ 'width': boxWidth, 'height': boxHeight, 'fill': '#ff9900' });
-    me.centerText(clientCacheService, 'Client: ' + me.event.event.client, 2.2);
+    this.centerText(clientCacheService, 'Client: ' + this.event.event.client, 2.2);
 
-    const providerService = me.createGroup(container, 'Provider', ((width - boxWidth) / 2), (height - (boxHeight * 2)));
+    const providerService = this.createGroup(container, 'Provider', ((width - boxWidth) / 2), (height - (boxHeight * 2)));
     providerService.append('rect').attrs({ 'width': boxWidth, 'height': boxHeight, 'fill': '#666666' });
-    me.centerText(providerService, 'Provider', 2.2).attr('style', 'fill: #d9d9d9');
+    this.centerText(providerService, 'Provider', 2.2).attr('style', 'fill: #d9d9d9');
 
     // Cache DB
     const cacheDBWidth = 141;
-    const cacheDB = me.createGroup(container, 'Cache_DB', ((width - cacheDBWidth) / 2), 345)
-      .attr('class', me.isActive(['CACHE', 'CACHE_RESPONSE']) ? 'active' : '');
+    const cacheDB = this.createGroup(container, 'Cache_DB', ((width - cacheDBWidth) / 2), 345)
+      .attr('class', this.isActive(['CACHE', 'CACHE_RESPONSE']) ? 'active' : '');
     cacheDB.append('path').attrs({ fill: '#b7b7b7', d: 'm0 0l0 0c0 -12 32 -22 72 -22c40 0 72 10 72 22l0 90c0 12 -32 22 -72 22c-40 0 -72 -10 -72 -22z' });
     cacheDB.append('path').attrs({
       stroke: '#efefef', 'stroke-width': 1.0, 'stroke-linejoin': 'round', 'stroke-linecap': 'butt',
       d: 'm144 0l0 0c0 12 -32 22 -72 22c-40 0 -72 -10 -72 -22'
     });
-    me.centerText(cacheDB, 'Cache', 2.4);
+    this.centerText(cacheDB, 'Cache', 2.4);
 
     // Render downstream
-    const downstream = me.createGroup(container, 'downstream', 0, 0);
-    const downPath = me.createGroup(downstream, null, 165, 0).attr('class', 'pathLink');
+    const downstream = this.createGroup(container, 'downstream', 0, 0);
+    const downPath = this.createGroup(downstream, null, 165, 0).attr('class', 'pathLink');
     downPath.append('path')
-      .attrs({ d: me.isActive(['NEW', 'CACHE'], true) ? 'm84 147l0 85' : 'm84 147l0 44l-75 0l0 40', class: 'link' });
+      .attrs({ d: this.isActive(['NEW', 'CACHE'], true) ? 'm84 147l0 85' : 'm84 147l0 44l-75 0l0 40', class: 'link' });
     downPath.append('use').attrs({
       id: 'decide_NEW__CACHE-DOWNSTREAM_QUEUE', 'xlink:href': '#descission', class: 'descission', x: 56, y: 191
     });
-    each(eventConfig.downstream, state => me.renderStreamGroup(downstream, 'downstream', state, 6));
+    each(eventConfig.downstream, state => this.renderStreamGroup(downstream, 'downstream', state, 6));
 
     // Render upstream
-    const upstream = me.createGroup(container, 'upstream', 0, 0);
-    const upPath = me.createGroup(upstream, null, 275, 0).attr('class', 'pathLink');
+    const upstream = this.createGroup(container, 'upstream', 0, 0);
+    const upPath = this.createGroup(upstream, null, 275, 0).attr('class', 'pathLink');
     upPath.append('path')
-      .attrs({ d: me.isActive(['CACHE_RESPONSE', 'SENT_TO_CLIENT'], true) ? 'm80 147l0 83' : 'm80 147l0 44l87 0l0 41', class: 'link' });
+      .attrs({ d: this.isActive(['CACHE_RESPONSE', 'SENT_TO_CLIENT'], true) ? 'm80 147l0 83' : 'm80 147l0 44l87 0l0 41', class: 'link' });
     upPath.append('use').attrs({
       id: 'decide_CACHE_RESPONSE__UPSTREAM_QUEUE-SENT_TO_CLIENT', 'xlink:href': '#descission', class: 'descission', x: 54, y: 191
     });
-    each(eventConfig.upstream, state => me.renderStreamGroup(upstream, 'upstream', state, 4));
+    each(eventConfig.upstream, state => this.renderStreamGroup(upstream, 'upstream', state, 4));
   }
 
   private renderStreamGroup(container, direction: string, state, lineHeight: number) {

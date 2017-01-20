@@ -1,25 +1,38 @@
+import { CommonModule } from '@angular/common';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, NgModule } from '@angular/core';
+import { MaterialModule, MdDialog, MdDialogModule } from '@angular/material';
 
 import { ErrorComponent } from './error.component';
 
+@NgModule({
+  imports: [
+    CommonModule,
+    MaterialModule.forRoot(),
+    MdDialogModule.forRoot()
+  ],
+  entryComponents: [ErrorComponent],
+  declarations: [ErrorComponent]
+})
+class ErrorDialogSpecModule { }
+
 describe('ErrorComponent', () => {
   let component: ErrorComponent;
-  let fixture: ComponentFixture<ErrorComponent>;
+  let dialog: MdDialog;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ErrorComponent ]
+      imports: [ErrorDialogSpecModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ErrorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    dialog = TestBed.get(MdDialog);
+    const dialogRef = dialog.open(ErrorComponent);
+    component = dialogRef.componentInstance;
   });
 
   it('should create', () => {

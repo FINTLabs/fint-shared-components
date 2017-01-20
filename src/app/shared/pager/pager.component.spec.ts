@@ -16,7 +16,7 @@ describe('PagerComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        MaterialModule
+        MaterialModule.forRoot()
       ],
       declarations: [PagerComponent, FaComponent]
     })

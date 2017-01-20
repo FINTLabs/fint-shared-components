@@ -19,7 +19,6 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
     EventsComponent,
     EventFilterPipe,
     EventFlowComponent,
-    EventFlowComponent
   ],
   imports: [
     CommonModule,

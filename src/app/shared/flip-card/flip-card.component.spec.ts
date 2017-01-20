@@ -16,11 +16,11 @@ describe('FlipCardComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        MaterialModule
+        MaterialModule.forRoot()
       ],
       declarations: [FlipCardComponent, FaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

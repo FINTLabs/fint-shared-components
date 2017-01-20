@@ -1,25 +1,38 @@
+import { CommonModule } from '@angular/common';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { DebugElement, NgModule } from '@angular/core';
+import { MaterialModule, MdDialog, MdDialogModule, MdDialogRef } from '@angular/material';
 
 import { ConfirmDeleteComponent } from './confirm-delete.component';
 
+@NgModule({
+  imports: [
+    CommonModule,
+    MaterialModule.forRoot(),
+    MdDialogModule.forRoot()
+  ],
+  entryComponents: [ConfirmDeleteComponent],
+  declarations: [ConfirmDeleteComponent]
+})
+class ConfirmDeleteSpecModule { }
+
 describe('ConfirmDeleteComponent', () => {
   let component: ConfirmDeleteComponent;
-  let fixture: ComponentFixture<ConfirmDeleteComponent>;
+  let dialog: MdDialog;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmDeleteComponent ]
+      imports: [ConfirmDeleteSpecModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmDeleteComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    dialog = TestBed.get(MdDialog);
+    const dialogRef = dialog.open(ConfirmDeleteComponent);
+    component = dialogRef.componentInstance;
   });
 
   it('should create', () => {

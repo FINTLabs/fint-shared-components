@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { each } from 'lodash';
 
-import { EventFilterPipe } from './events-filter.pipe';
 import { EventService } from './events.service';
 import { IEventsHALPage, IEvent, IEvents } from './model';
 

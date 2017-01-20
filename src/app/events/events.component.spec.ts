@@ -1,55 +1,45 @@
-import { Subscribable } from 'rxjs/Observable';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { By, Title } from '@angular/platform-browser';
+import { DebugElement, NgModule } from '@angular/core';
+import { CommonModule, APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
+
 import { Observable, Subject } from 'rxjs/Rx';
-import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/of';
 
 import { LibSharedModule } from '../shared/shared.module';
 import { EventRoutes } from './events.routes';
 
 import { EventService } from './events.service';
 import { EventsComponent } from './events.component';
-import { IEvent, IEvents } from './model';
-
+import { EventFlowComponent } from './event-flow/event-flow.component';
+import { EventFilterPipe } from './events-filter.pipe';
+import { IEvent, IEvents, IEventsHALPage } from './model';
 
 class EventServiceStub {
-  all(): Observable<IEvents[]> {
-    let subject = new Subject<IEvents[]>();
-    subject.next([
-      {
-        corrId: '',
-        source: '',
-        orgId: '',
-        timestamp: 1000,
-        event: {
-          corrId: '',
-          verb: '',
-          status: '',
-          time: 112312,
-          orgId: '',
-          source: '',
-          client: '',
-          data: ['', '']
-        }
+  all(page: number = 1, search?: string): Observable<IEventsHALPage> {
+    return Observable.of({
+      total_items: 1, page: 1, page_count: 1, page_size: 10, _embedded: {
+        mongoAuditEventList: [
+          {
+            corrId: '', source: '', orgId: '', timestamp: 1000, event: {
+              corrId: '', verb: '', status: '', time: 112312, orgId: '', source: '', client: '', data: ['', '']
+            }
+          }
+        ]
       }
-    ]);
-    return Observable.from(subject);
+    });
   }
 }
 
-class RouterStub {
-
-}
-
-class ActivatedRouteStub {
-
-}
+@NgModule({
+  imports: [RouterModule.forRoot([...EventRoutes])],
+  exports: [RouterModule]
+})
+class MockRouterModule { }
 
 describe('EventsComponent', () => {
   let component: EventsComponent;
@@ -61,15 +51,14 @@ describe('EventsComponent', () => {
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule,
+        MaterialModule.forRoot(),
         LibSharedModule,
-        RouterModule.forChild([...EventRoutes])
+        MockRouterModule
       ],
-      declarations: [EventsComponent],
+      declarations: [EventsComponent, EventFlowComponent, EventFilterPipe],
       providers: [
         { provide: EventService, useClass: EventServiceStub },
-        { provide: Router, useClass: RouterStub },
-        { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+        { provide: APP_BASE_HREF, useValue: '/' }
       ]
     })
       .compileComponents();
