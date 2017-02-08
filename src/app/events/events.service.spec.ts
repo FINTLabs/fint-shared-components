@@ -2,7 +2,10 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 import { ConnectionBackend, Http, BaseRequestOptions } from '@angular/http';
-import { MdDialog } from '@angular/material';
+import { MdDialog, Overlay, OverlayContainer } from '@angular/material';
+import { OverlayPositionBuilder } from '@angular/material/core/overlay/position/overlay-position-builder';
+import { ViewportRuler } from '@angular/material/core/overlay/position/viewport-ruler';
+import { FakeViewportRuler } from '@angular/material/core/overlay/position/fake-viewport-ruler';
 
 import { EventService } from './events.service';
 import { FintDialogService } from '../shared/dialogs';
@@ -19,8 +22,16 @@ describe('Service: Events', () => {
         MockBackend,
         BaseRequestOptions,
         EventService,
-        MdDialog,
         FintDialogService,
+
+        // Required for testing components using angular-material
+        MdDialog,
+        Overlay,
+        OverlayContainer,
+        OverlayPositionBuilder,
+        {
+          provide: ViewportRuler, useClass: FakeViewportRuler
+        }
       ]
     });
   });

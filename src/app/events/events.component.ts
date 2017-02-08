@@ -64,13 +64,13 @@ export class EventsComponent implements OnInit {
     this.EventService.all(page, this.searchstring).subscribe((result: IEventsHALPage) => {
       this.isLoading = false;
       // Pager data
-      this.total = result.total_items;
-      this.itemsPerPage = result.page_size;
+      this.total = result.totalItems;
+      this.itemsPerPage = result.pageSize;
       this.current = result.page;
-      this.pages = result.page_count;
+      this.pages = result.pageCount;
 
       // View data
-      this.events = result._embedded.mongoAuditEventList;
+      this.events = result.data;
     });
   }
 

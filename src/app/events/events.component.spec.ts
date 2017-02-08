@@ -19,19 +19,11 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
 import { EventFilterPipe } from './events-filter.pipe';
 import { IEvent, IEvents, IEventsHALPage } from './model';
 
+import { mockAuditEvents } from './mock/mockAuditEvents';
+
 class EventServiceStub {
   all(page: number = 1, search?: string): Observable<IEventsHALPage> {
-    return Observable.of({
-      total_items: 1, page: 1, page_count: 1, page_size: 10, _embedded: {
-        mongoAuditEventList: [
-          {
-            corrId: '', source: '', orgId: '', timestamp: 1000, event: {
-              corrId: '', verb: '', status: '', time: 112312, orgId: '', source: '', client: '', data: ['', '']
-            }
-          }
-        ]
-      }
-    });
+    return Observable.of(mockAuditEvents);
   }
 }
 

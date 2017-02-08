@@ -10,7 +10,7 @@ export class FintDialogService {
 
   constructor(private dialog: MdDialog) { }
 
-  displayHttpError(error: any): MdDialogRef<ErrorComponent> {
+  displayHttpError(error: Response): MdDialogRef<ErrorComponent> {
     const body = error.json() || '';
     const err = body.message || JSON.stringify(body);
     const errorDialogRef = this.dialog.open(ErrorComponent);
@@ -21,7 +21,10 @@ export class FintDialogService {
   }
 
   displayError(subtitle: string, message: string) {
-    return this.displayHttpError({ message: message, status: subtitle });
+    const errorDialogRef = this.dialog.open(ErrorComponent);
+    errorDialogRef.componentInstance.errorSubtitle = subtitle;
+    errorDialogRef.componentInstance.errorMessage = message;
+    return errorDialogRef;
   }
 
   confirmDelete(): MdDialogRef<ConfirmDeleteComponent> {

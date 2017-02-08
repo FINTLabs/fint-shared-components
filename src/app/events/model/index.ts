@@ -21,11 +21,9 @@ export interface IEvents {
 }
 
 export interface IEventsHALPage {
-  total_items: number;
+  totalItems: number;
   page: number;
-  page_count: number;
-  page_size: number;
-  _embedded: {
-    mongoAuditEventList: IEvents[]
-  }
+  pageCount: number;
+  pageSize: number;
+  data: IEvents[]
 }
