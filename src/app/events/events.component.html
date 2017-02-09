@@ -6,13 +6,14 @@
 
 <md-card>
   <md-card-title>
-    <md-input [(ngModel)]="searchstring" role="searchbox">
-      <button md-suffix md-button role="search"><fint-fa name="search"></fint-fa>Søk</button>
+    <md-input-container>
+      <input mdInput md-input type="text" [(ngModel)]="searchstring" role="searchbox" #search>
       <button md-suffix md-button (click)="searchstring = ''"><fint-fa name="times"></fint-fa></button>
-    </md-input>
+      <button md-suffix md-button role="search"><fint-fa name="search"></fint-fa>Søk</button>
+    </md-input-container>
   </md-card-title>
-  <md-card-content class="table-container" *ngIf="events">
-    <fint-pager [total]="pages" [(page)]="current"></fint-pager>
+  <md-card-content class="table-container" *ngIf="eventGroups">
+    <fint-pager [total]="pages" [min]="1" [(page)]="current"></fint-pager>
     <table>
       <thead>
         <tr>
@@ -25,39 +26,53 @@
         </tr>
       </thead>
 
-      <tbody *ngFor="let event of events" [ngClass]="{'loading': isLoading}">
-        <tr (click)="openEvent(event)">
-          <td [innerHTML]="event.corrId | highlight:searchstring"></td>
-          <td [innerHTML]="event.source | highlight:searchstring"></td>
-          <td [innerHTML]="event.event.verb | highlight:searchstring"></td>
-          <td [innerHTML]="event.event.status | highlight:searchstring"></td>
-          <td [innerHTML]="event.event.client | highlight:searchstring"></td>
-          <td [innerHTML]="event.event.time | utcDate | highlight:searchstring"></td>
+      <tbody *ngFor="let eventGroup of eventGroups" [ngClass]="{'loading': isLoading}">
+        <tr (click)="openEvent(eventGroup)">
+          <td [innerHTML]="eventGroup.corrId | highlight:searchstring"></td>
+          <td [innerHTML]="eventGroup.currentEvent.source | highlight:searchstring"></td>
+          <td [innerHTML]="eventGroup.currentEvent.action | highlight:searchstring"></td>
+          <td [innerHTML]="eventGroup.currentEvent.status | highlight:searchstring"></td>
+          <td [innerHTML]="eventGroup.currentEvent.client | highlight:searchstring"></td>
+          <td [innerHTML]="eventGroup.currentEvent.time | utcDate | highlight:searchstring"></td>
         </tr>
-        <tr *ngIf="event.isOpen || events.length === 1">
-          <td colspan="6" [className]="event.showDetail ? 'detail-view' : ''">
+        <tr *ngIf="eventGroup.isOpen || eventGroups.length === 1">
+          <td colspan="6" [className]="eventGroup.showDetail ? 'detail-view' : ''">
             <div class="flow-container">
-              <fint-event-flow [event]="event" (onOpen)="showDetail($event)"></fint-event-flow>
-              <div *ngIf="activeEvent">
-                <dl>
-                  <dt>Action</dt>
-                  <dd>{{activeEvent.action}}</dd>
-                  <dt>Status</dt>
-                  <dd>{{activeEvent.status}}</dd>
-                  <dt>Time</dt>
-                  <dd>{{activeEvent.time | utcDate}}</dd>
-                  <dt>OrgId</dt>
-                  <dd>{{activeEvent.orgId}}</dd>
-                  <dt>Source</dt>
-                  <dd>{{activeEvent.source}}</dd>
-                  <dt>Client</dt>
-                  <dd>{{activeEvent.client}}</dd>
-                  <dt>Message</dt>
-                  <dd>{{activeEvent.message || '&nbsp;'}}</dd>
-                  <dt>Data</dt>
-                  <dd>{{activeEvent.data.join(' ')}}</dd>
-                </dl>
-              </div>
+              <fint-event-flow [eventGroup]="eventGroup" (onOpen)="showDetail($event)"></fint-event-flow>
+              <table>
+                <tr>
+                  <th>Action</th>
+                  <td><span *ngIf="activeEvent">{{activeEvent.event.action}}</span></td>
+                </tr>
+                <tr>
+                  <th>Status</th>
+                  <td><span *ngIf="activeEvent">{{activeEvent.event.status}}</span></td>
+                </tr>
+                <tr>
+                  <th>Time</th>
+                  <td><span *ngIf="activeEvent">{{activeEvent.timestamp | utcDate}}</span></td>
+                </tr>
+                <tr>
+                  <th>OrgId</th>
+                  <td><span *ngIf="activeEvent">{{activeEvent.orgId}}</span></td>
+                </tr>
+                <tr>
+                  <th>Source</th>
+                  <td><span *ngIf="activeEvent">{{activeEvent.source}}</span></td>
+                </tr>
+                <tr>
+                  <th>Client</th>
+                  <td><span *ngIf="activeEvent">{{activeEvent.event.client}}</span></td>
+                </tr>
+                <tr>
+                  <th>Message</th>
+                  <td><span *ngIf="activeEvent">{{activeEvent.event.message || '&nbsp;'}}</span></td>
+                </tr>
+                <tr>
+                  <th>Data</th>
+                  <td><span *ngIf="activeEvent">{{activeEvent.event.data.join(' ')}}</span></td>
+                </tr>
+              </table>
             </div>
           </td>
         </tr>
@@ -65,6 +80,6 @@
     </table>
   </md-card-content>
   <md-card-actions>
-    <fint-pager [total]="pages" [(page)]="current"></fint-pager>
+    <fint-pager [total]="pages" [min]="1" [(page)]="current"></fint-pager>
   </md-card-actions>
 </md-card>

@@ -13,13 +13,15 @@ export class EventFilterPipe implements PipeTransform {
     if (!search) { return value; }
     return value.filter(item => {
       if (item) {
-        let time = this.utcDatePipe.toDateString(item.event.time);
-        return item.corrId.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          || item.source.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          || item.event.client.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          || (item.event.verb ? item.event.verb.toLowerCase().indexOf(search.toLowerCase()) !== -1 : false)
-          || item.event.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          || time.indexOf(search.toLowerCase()) !== -1;
+        return item.events.some(e => {
+          const time = this.utcDatePipe.toDateString(e.time);
+          return item.corrId.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            || e.source.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            || e.client.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            || (e.action ? e.action.toLowerCase().indexOf(search.toLowerCase()) !== -1 : false)
+            || e.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            || time.indexOf(search.toLowerCase()) !== -1;
+        });
       }
       return item;
     });

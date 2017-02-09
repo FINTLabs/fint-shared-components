@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { each } from 'lodash';
 
 import { EventService } from './events.service';
-import { IEventsHALPage, IEvent, IEvents } from './model';
+import { IEvent, IEventGroup, IEvents, IEventsHALPage } from './model';
+import { FlowEvent } from './event-flow/event-flow.component';
 
 @Component({
   selector: 'fint-events',
@@ -12,8 +13,8 @@ import { IEventsHALPage, IEvent, IEvents } from './model';
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent implements OnInit {
-  events: IEvents[];
-  activeEvent: IEvent;
+  eventGroups: IEventGroup[];
+  activeEvent: IEvents;
   isLoading: boolean = false;
 
   // Pager config
@@ -70,18 +71,18 @@ export class EventsComponent implements OnInit {
       this.pages = result.pageCount;
 
       // View data
-      this.events = result.data;
+      this.eventGroups = result.data;
     });
   }
 
-  openEvent(event: IEvents) {
-    let lastState = event.isOpen;
-    each(this.events, (e: IEvents) => { e.isOpen = false; });
+  openEvent(event: IEventGroup) {
+    const lastState = event.isOpen;
+    each(this.eventGroups, (e: IEventGroup) => { e.isOpen = false; });
     event.isOpen = !lastState;
   }
 
-  showDetail($event: { eventDetail: IEvent, event: IEvents }) {
-    $event.event.showDetail = true;
-    this.activeEvent = $event.eventDetail;
+  showDetail(evt: FlowEvent) {
+    evt.eventGroup.showDetail = true;
+    this.activeEvent = evt.detail;
   }
 }

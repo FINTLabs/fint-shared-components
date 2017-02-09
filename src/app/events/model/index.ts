@@ -1,6 +1,6 @@
 export interface IEvent {
   corrId: string;
-  verb: string;
+  action: string;
   status: string;
   time: number;
   orgId: string;
@@ -15,7 +15,12 @@ export interface IEvents {
   orgId: string;
   timestamp: number;
   event: IEvent;
-  events?: IEvent[];
+}
+
+export interface IEventGroup {
+  corrId: string;
+  currentEvent: IEvent;
+  events: IEvents[];
   isOpen?: boolean;
   showDetail?: boolean;
 }
@@ -25,5 +30,5 @@ export interface IEventsHALPage {
   page: number;
   pageCount: number;
   pageSize: number;
-  data: IEvents[]
+  data: IEventGroup[]
 }

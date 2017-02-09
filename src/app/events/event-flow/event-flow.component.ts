@@ -1,7 +1,12 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as D3 from '../../d3.bundle';
 import { each, map } from 'lodash';
-import { IEvent, IEvents } from '../model';
+import { IEvent, IEventGroup, IEvents } from '../model';
+
+export interface FlowEvent {
+  detail: IEvents;
+  eventGroup: IEventGroup;
+}
 
 @Component({
   selector: 'fint-event-flow',
@@ -9,8 +14,8 @@ import { IEvent, IEvents } from '../model';
   styleUrls: ['./event-flow.component.scss']
 })
 export class EventFlowComponent implements OnInit, AfterViewInit {
-  @Input() event: IEvents;
-  @Output() onOpen: EventEmitter<{ eventDetail: IEvent, event: IEvents }> = new EventEmitter<{ eventDetail: IEvent, event: IEvents }>();
+  @Input() eventGroup: IEventGroup;
+  @Output() onOpen: EventEmitter<FlowEvent> = new EventEmitter<FlowEvent>();
   @ViewChild('svg') svg: ElementRef;
   private host;
   private pathFunction;
@@ -111,7 +116,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     const boxWidth = 365, boxHeight = 44;
     const clientCacheService = this.createGroup(container, 'Client_CacheService', ((width - boxWidth) / 2), 0);
     clientCacheService.append('rect').attrs({ 'width': boxWidth, 'height': boxHeight, 'fill': '#ff9900' });
-    this.centerText(clientCacheService, 'Client: ' + this.event.event.client, 2.2);
+    this.centerText(clientCacheService, 'Client: ' + this.eventGroup.currentEvent.client, 2.2);
 
     const providerService = this.createGroup(container, 'Provider', ((width - boxWidth) / 2), (height - (boxHeight * 2)));
     providerService.append('rect').attrs({ 'width': boxWidth, 'height': boxHeight, 'fill': '#666666' });
@@ -218,15 +223,17 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     return (requireAll ? details.length === status.length : details.length);
   }
 
-  getDetail(status: string[]): IEvent[] {
+  getDetail(status: string[]): IEvents[] {
     status = map(status, state => state.toLowerCase());
-    return this.event.events.filter((e: IEvent) => status.indexOf(e.status.toLowerCase()) > -1);
+    return this.eventGroup.events.filter((e: IEvents) => {
+      return status.indexOf(e.event.status.toLowerCase()) > -1;
+    });
   }
 
   showDetail(name: string) {
     const activeEvent = this.getDetail([name]);
     if (activeEvent.length) {
-      this.onOpen.emit({ eventDetail: this.getDetail([name])[0], event: this.event });
+      this.onOpen.emit({ detail: this.getDetail([name])[0], eventGroup: this.eventGroup });
     }
   }
 }

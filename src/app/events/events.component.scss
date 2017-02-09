@@ -1,7 +1,7 @@
-md-input {
+md-input-container {
   width: 100%;
+  display: block;
   button {
-    float: right;
     padding: 0;
     margin: 0;
     margin-bottom: -1em;
@@ -28,22 +28,17 @@ tbody {
       > * {
         flex: 1;
       }
-    }
-    dl {
-      margin-left: 2rem;
-      text-align: left;
-      dt, dd {
-        padding-top: 5px;
+      tr {
+        height: 1.5rem;
       }
-      dt {
-        float: left;
-        font-weight: bold;
+      th {
+        width: 80px;
         text-align: right;
-        display: inline-block;
-        width: 60px;
       }
-      dd {
-        margin-left: 70px;
+      td {
+        width: 100%;
+        border-top: 0;
+        text-align: left;
       }
     }
   }
