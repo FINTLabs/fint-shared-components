@@ -75,6 +75,7 @@ export class EventsComponent implements OnInit {
   }
 
   openEvent(event: IEventGroup) {
+    this.activeEvent = null;
     const lastState = event.isOpen;
     this.eventGroups.forEach((e: IEventGroup) => { e.isOpen = false; });
     event.isOpen = !lastState;

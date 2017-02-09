@@ -7,6 +7,23 @@ export interface FlowEvent {
   eventGroup: IEventGroup;
 }
 
+export interface LinkState {
+  ids: string[];
+  descission: number[];
+  path: [[number, number]];
+}
+export interface EventState {
+  id: string;
+  alias?: string;
+  code: string;
+  aliasCode?: string;
+  type: string;
+  x: number;
+  y: number;
+  linkTo?: LinkState;
+  arrowType?: string;
+}
+
 @Component({
   selector: 'fint-event-flow',
   templateUrl: './event-flow.component.html',
@@ -47,7 +64,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
       }
     };
     const eventConfig = {
-      downstream: [
+      downstream: <EventState[]>[
         { id: 'NEW', code: '10', type: 'stream', x: 219, y: 69 },
         { id: 'CACHE', code: '50', type: 'stream', x: 219, y: 230 },
         {
@@ -65,7 +82,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
         { id: 'PROVIDER_ACCEPTED', code: '13', type: 'stream', x: 144, y: 393 },
         { id: 'PROVIDER_RESPONSE_ORPHAN', code: '100', type: 'error', x: 80, y: 393 },
       ],
-      upstream: [
+      upstream: <EventState[]>[
         {
           id: 'PROVIDER_RESPONSE', code: '14', type: 'stream', arrowType: 'long', x: 412, y: 350, linkTo: {
             ids: ['PROVIDER_RESPONSE_ORPHAN'], descission: [50, 90],
@@ -76,7 +93,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
         { id: 'PROVIDER_REJECTED', code: '102', type: 'error', x: 482, y: 343 },
         { id: 'PROVIDER_NOT_CONFIRMED', code: '103', type: 'error', x: 482, y: 343 },
         { id: 'UNABLE_TO_DELIVER', code: '104', type: 'error', x: 482, y: 343 },
-        { id: 'UPSTREAM_QUEUE', code: '15', type: 'stream', arrowType: 'long', x: 412, y: 230 },
+        { id: 'UPSTREAM_QUEUE', code: '15', alias: 'TEMP_UPSTREAM_QUEUE', aliasCode: '16', type: 'stream', arrowType: 'long', x: 412, y: 230 },
         { id: 'CACHE_RESPONSE', code: '51', type: 'stream', x: 325, y: 230 },
         { id: 'SENT_TO_CLIENT', code: '49', type: 'stream', x: 325, y: 69 },
       ]
@@ -153,13 +170,14 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     eventConfig.upstream.forEach(state => this.renderStreamGroup(upstream, 'upstream', state, 4));
   }
 
-  private renderStreamGroup(container, direction: string, state, lineHeight: number) {
+  private renderStreamGroup(container, direction: string, state: EventState, lineHeight: number) {
     const stateGroup = this.createGroup(container, state.id, state.x, state.y)
-      .attr('class', state.type + (this.isActive([state.id], true) ? ' active' : ''));
+      .attr('class', state.type + (this.isActive([state.id, state.alias]) ? ' active' : ''));
     // stateGroup.append('use').attr('xlink:href', this.getXLinkType(direction, state));
     stateGroup.append('path').attr('d', this.getXLinkType(direction, state));
-    this.centerText(stateGroup, state.id, lineHeight).call(this.wrap, (state.type === 'stream' ? 60 : 50), true);
-    stateGroup.on('click', evt => this.showDetail(state.id));
+    const text = `${state.id}_(${state.code})` + (state.alias ? `_/_${state.alias}_(${state.aliasCode})` : '');
+    this.centerText(stateGroup, text, lineHeight).call(this.wrap, (state.type === 'stream' ? 60 : 50), true);
+    stateGroup.on('click', evt => this.showDetail(state));
 
     // Render links if present and active
     if (state.linkTo && this.isActive(state.linkTo.ids, true)) {
@@ -223,16 +241,18 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
   }
 
   getDetail(status: string[]): IEvents[] {
-    status = status.map(state => state.toLowerCase());
+    status = status
+      .filter(state => state != null)
+      .map(state => state.toLowerCase());
     return this.eventGroup.events.filter((e: IEvents) => {
       return status.indexOf(e.event.status.toLowerCase()) > -1;
     });
   }
 
-  showDetail(name: string) {
-    const activeEvent = this.getDetail([name]);
+  showDetail(state: EventState) {
+    const activeEvent = this.getDetail([state.id, state.alias]);
     if (activeEvent.length) {
-      this.onOpen.emit({ detail: this.getDetail([name])[0], eventGroup: this.eventGroup });
+      this.onOpen.emit({ detail: activeEvent[0], eventGroup: this.eventGroup });
     }
   }
 }
