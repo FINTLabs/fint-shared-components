@@ -16,7 +16,6 @@ import { EventRoutes } from './events.routes';
 import { EventService } from './events.service';
 import { EventsComponent } from './events.component';
 import { EventFlowComponent } from './event-flow/event-flow.component';
-import { EventFilterPipe } from './events-filter.pipe';
 import { IEvent, IEvents, IEventsHALPage } from './model';
 
 import { mockAuditEvents } from './mock/mockAuditEvents';
@@ -47,7 +46,7 @@ describe('EventsComponent', () => {
         LibSharedModule,
         MockRouterModule
       ],
-      declarations: [EventsComponent, EventFlowComponent, EventFilterPipe],
+      declarations: [EventsComponent, EventFlowComponent],
       providers: [
         { provide: EventService, useClass: EventServiceStub },
         { provide: APP_BASE_HREF, useValue: '/' }

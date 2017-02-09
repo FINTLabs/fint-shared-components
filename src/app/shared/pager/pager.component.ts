@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { range } from 'lodash';
 
 @Component({
   selector: 'fint-pager',

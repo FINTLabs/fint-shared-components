@@ -5,7 +5,6 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { groupBy } from 'lodash';
 
 import { FintDialogService } from '../shared';
 import { IEventsHALPage } from './model';

@@ -1,7 +1,6 @@
 import { Title } from '@angular/platform-browser';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { each } from 'lodash';
 
 import { EventService } from './events.service';
 import { IEvent, IEventGroup, IEvents, IEventsHALPage } from './model';
@@ -77,7 +76,7 @@ export class EventsComponent implements OnInit {
 
   openEvent(event: IEventGroup) {
     const lastState = event.isOpen;
-    each(this.eventGroups, (e: IEventGroup) => { e.isOpen = false; });
+    this.eventGroups.forEach((e: IEventGroup) => { e.isOpen = false; });
     event.isOpen = !lastState;
   }
 

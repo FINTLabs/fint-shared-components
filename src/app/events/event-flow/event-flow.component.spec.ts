@@ -4,9 +4,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { IEvents } from '../model';
+import { IEventGroup } from '../model';
 import { EventFlowComponent } from './event-flow.component';
-import { mockAuditEvent } from '../mock/mockAuditEvents';
+import { mockAuditEventGroup } from '../mock/mockAuditEvents';
 
 describe('EventFlowComponent', () => {
   let component: EventFlowComponent;
@@ -33,10 +33,10 @@ describe('EventFlowComponent', () => {
 
 @Component({
   selector: 'fint-mockevents-wrapper',
-  template: '<fint-event-flow [event]="event" (onOpen)="showDetail($event)"></fint-event-flow>'
+  template: '<fint-event-flow [eventGroup]="eventGroup" (onOpen)="showDetail($event)"></fint-event-flow>'
 })
 class MockEventsWrapperComponent {
-  event = <IEvents>mockAuditEvent;
+  eventGroup = <IEventGroup>mockAuditEventGroup;
 
   showDetail($event) { }
 }

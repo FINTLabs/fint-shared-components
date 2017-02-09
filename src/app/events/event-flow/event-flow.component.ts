@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as D3 from '../../d3.bundle';
-import { each, map } from 'lodash';
 import { IEvent, IEventGroup, IEvents } from '../model';
 
 export interface FlowEvent {
@@ -49,37 +48,37 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     };
     const eventConfig = {
       downstream: [
-        { id: 'NEW', type: 'stream', x: 219, y: 69 },
-        { id: 'CACHE', type: 'stream', x: 219, y: 230 },
+        { id: 'NEW', code: '10', type: 'stream', x: 219, y: 69 },
+        { id: 'CACHE', code: '50', type: 'stream', x: 219, y: 230 },
         {
-          id: 'DOWNSTREAM_QUEUE', type: 'stream', x: 144, y: 230, linkTo: {
+          id: 'DOWNSTREAM_QUEUE', code: '11', type: 'stream', x: 144, y: 230, linkTo: {
             ids: ['UNABLE_TO_DELIVER'], descission: [-10, 43],
             path: [[-5, 43], [-40, 43], [-40, 310], [363, 310], [363, 60], [310, 60]]
           }
         },
         {
-          id: 'DELIVERED_TO_PROVIDER', type: 'stream', x: 144, y: 310, linkTo: {
+          id: 'DELIVERED_TO_PROVIDER', code: '12', type: 'stream', x: 144, y: 310, linkTo: {
             ids: ['NO_RESPONSE_FOR_PROVIDER', 'PROVIDER_REJECTED', 'PROVIDER_NOT_CONFIRMED'], descission: [-10, 43],
             path: [[-5, 43], [-40, 43], [-40, 230], [363, 230], [363, -20], [310, -20]]
           }
         },
-        { id: 'PROVIDER_ACCEPTED', type: 'stream', x: 144, y: 393 },
-        { id: 'PROVIDER_RESPONSE_ORPHAN', type: 'error', x: 80, y: 393 },
+        { id: 'PROVIDER_ACCEPTED', code: '13', type: 'stream', x: 144, y: 393 },
+        { id: 'PROVIDER_RESPONSE_ORPHAN', code: '100', type: 'error', x: 80, y: 393 },
       ],
       upstream: [
         {
-          id: 'PROVIDER_RESPONSE', type: 'stream', arrowType: 'long', x: 412, y: 350, linkTo: {
+          id: 'PROVIDER_RESPONSE', code: '14', type: 'stream', arrowType: 'long', x: 412, y: 350, linkTo: {
             ids: ['PROVIDER_RESPONSE_ORPHAN'], descission: [50, 90],
             path: [[55, 90], [95, 90], [95, 190], [-307, 190], [-307, 118]]
           }
         },
-        { id: 'NO_RESPONSE_FOR_PROVIDER', type: 'error', x: 482, y: 343 },
-        { id: 'PROVIDER_REJECTED', type: 'error', x: 482, y: 343 },
-        { id: 'PROVIDER_NOT_CONFIRMED', type: 'error', x: 482, y: 343 },
-        { id: 'UNABLE_TO_DELIVER', type: 'error', x: 482, y: 343 },
-        { id: 'UPSTREAM_QUEUE', type: 'stream', arrowType: 'long', x: 412, y: 230 },
-        { id: 'CACHE_RESPONSE', type: 'stream', x: 325, y: 230 },
-        { id: 'SENT_TO_CLIENT', type: 'stream', x: 325, y: 69 },
+        { id: 'NO_RESPONSE_FOR_PROVIDER', code: '101', type: 'error', x: 482, y: 343 },
+        { id: 'PROVIDER_REJECTED', code: '102', type: 'error', x: 482, y: 343 },
+        { id: 'PROVIDER_NOT_CONFIRMED', code: '103', type: 'error', x: 482, y: 343 },
+        { id: 'UNABLE_TO_DELIVER', code: '104', type: 'error', x: 482, y: 343 },
+        { id: 'UPSTREAM_QUEUE', code: '15', type: 'stream', arrowType: 'long', x: 412, y: 230 },
+        { id: 'CACHE_RESPONSE', code: '51', type: 'stream', x: 325, y: 230 },
+        { id: 'SENT_TO_CLIENT', code: '49', type: 'stream', x: 325, y: 69 },
       ]
     };
 
@@ -141,7 +140,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     downPath.append('use').attrs({
       id: 'decide_NEW__CACHE-DOWNSTREAM_QUEUE', 'xlink:href': '#descission', class: 'descission', x: 56, y: 191
     });
-    each(eventConfig.downstream, state => this.renderStreamGroup(downstream, 'downstream', state, 6));
+    eventConfig.downstream.forEach(state => this.renderStreamGroup(downstream, 'downstream', state, 6));
 
     // Render upstream
     const upstream = this.createGroup(container, 'upstream', 0, 0);
@@ -151,7 +150,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
     upPath.append('use').attrs({
       id: 'decide_CACHE_RESPONSE__UPSTREAM_QUEUE-SENT_TO_CLIENT', 'xlink:href': '#descission', class: 'descission', x: 54, y: 191
     });
-    each(eventConfig.upstream, state => this.renderStreamGroup(upstream, 'upstream', state, 4));
+    eventConfig.upstream.forEach(state => this.renderStreamGroup(upstream, 'upstream', state, 4));
   }
 
   private renderStreamGroup(container, direction: string, state, lineHeight: number) {
@@ -224,7 +223,7 @@ export class EventFlowComponent implements OnInit, AfterViewInit {
   }
 
   getDetail(status: string[]): IEvents[] {
-    status = map(status, state => state.toLowerCase());
+    status = status.map(state => state.toLowerCase());
     return this.eventGroup.events.filter((e: IEvents) => {
       return status.indexOf(e.event.status.toLowerCase()) > -1;
     });

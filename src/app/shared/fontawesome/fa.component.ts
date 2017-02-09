@@ -1,5 +1,4 @@
 import { Component, OnInit, OnChanges, Input, ElementRef, SimpleChange } from '@angular/core';
-import { each } from 'lodash';
 
 @Component({
   selector: 'fint-fa',
@@ -37,10 +36,10 @@ export class FaComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
-    let me = this;
-    each(Object.keys(changes), function (key) {
-      let previousValue = changes[key].previousValue;
-      let currentValue = changes[key].currentValue;
+    const me = this;
+    Object.keys(changes).forEach(key => {
+      const previousValue = changes[key].previousValue;
+      const currentValue = changes[key].currentValue;
       switch (key) {
         case 'name':
           me.removeFaClass(`fa-${previousValue}`);

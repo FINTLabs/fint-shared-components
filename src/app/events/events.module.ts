@@ -17,7 +17,6 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
 @NgModule({
   declarations: [
     EventsComponent,
-    EventFilterPipe,
     EventFlowComponent,
   ],
   imports: [
@@ -27,9 +26,6 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
     MaterialModule,
     LibSharedModule,
     RouterModule.forChild([...EventRoutes])
-  ],
-  exports: [
-    EventFilterPipe
   ],
   providers: [EventService]
 })
