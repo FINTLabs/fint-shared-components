@@ -62,7 +62,6 @@ export class EventsComponent implements OnInit {
   loadEvents(page: number = 1) {
     this.isLoading = true;
     this.EventService.all(page, this.searchstring).subscribe((result: IEventsHALPage) => {
-      this.isLoading = false;
       // Pager data
       this.total = result.totalItems;
       this.itemsPerPage = result.pageSize;
@@ -71,6 +70,7 @@ export class EventsComponent implements OnInit {
 
       // View data
       this.eventGroups = result.data;
+      this.isLoading = false;
     });
   }
 
