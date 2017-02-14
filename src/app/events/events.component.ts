@@ -20,12 +20,12 @@ export class EventsComponent implements OnInit {
   pages: number;
   itemsPerPage: number;
   total: number;
-  _current: number; // Current page
+  _current: number = 1; // Current page
   get current() { return this._current; }
   set current(val: number) {
     if (val != this._current) {
       this._current = val;
-      this.loadEvents(this._current);
+      this.loadEvents();
     }
   }
 
@@ -35,7 +35,7 @@ export class EventsComponent implements OnInit {
     if (this._searchstring != value) {
       this._searchstring = value;
       this._current = 1; // Reset pager
-      this.loadEvents(this._current);
+      this.loadEvents();
     }
   }
 
@@ -49,7 +49,7 @@ export class EventsComponent implements OnInit {
 
   ngOnInit() {
     // Set initial page and load data
-    this.current = 1;
+    this.loadEvents();
 
     // Search filter
     this.route.params.subscribe(params => {
@@ -59,19 +59,20 @@ export class EventsComponent implements OnInit {
     });
   }
 
-  loadEvents(page: number = 1) {
+  loadEvents() {
     this.isLoading = true;
-    this.EventService.all(page, this.searchstring).subscribe((result: IEventsHALPage) => {
-      // Pager data
-      this.total = result.totalItems;
-      this.itemsPerPage = result.pageSize;
-      this.current = result.page;
-      this.pages = result.pageCount;
+    this.EventService.all(this.current, this.itemsPerPage, this.searchstring)
+      .subscribe((result: IEventsHALPage) => {
+        // Pager data
+        this.total = result.totalItems;
+        this.itemsPerPage = result.pageSize;
+        this._current = result.page;
+        this.pages = result.pageCount;
 
-      // View data
-      this.eventGroups = result.data;
-      this.isLoading = false;
-    });
+        // View data
+        this.eventGroups = result.data;
+        this.isLoading = false;
+      });
   }
 
   openEvent(event: IEventGroup) {
