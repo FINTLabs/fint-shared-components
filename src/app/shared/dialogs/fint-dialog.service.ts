@@ -11,8 +11,14 @@ export class FintDialogService {
   constructor(private dialog: MdDialog) { }
 
   displayHttpError(error: Response): MdDialogRef<ErrorComponent> {
-    const body = error.json() || '';
-    const err = body.message || JSON.stringify(body);
+    let body; let err;
+    try {
+      body = error.json();
+      err = body.message;
+    } catch (ex) {
+      body = error.text();
+      err = body;
+    }
     const errorDialogRef = this.dialog.open(ErrorComponent);
     errorDialogRef.componentInstance.errorSubtitle = `${error.status} ${'- ' + error.statusText || ''}`;
     errorDialogRef.componentInstance.path = body.path;
