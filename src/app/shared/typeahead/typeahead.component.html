@@ -1,6 +1,6 @@
 <md-input-container>
   <md-placeholder>{{placeholder}}</md-placeholder>
-  <input md-input type="search" (focus)="onEnter()" (blur)="onLeave()" (keyup)="onKeyUp($event)" [(value)]="value" required="{{required}}" autocomplete="off">
+  <input md-input mdInput type="search" (focus)="onEnter()" (blur)="onLeave()" (keyup)="onKeyUp($event)" [(value)]="value" required="{{required}}" autocomplete="off">
   <ng-content></ng-content>
   <md-card *ngIf="popupVisible">
     <md-list>

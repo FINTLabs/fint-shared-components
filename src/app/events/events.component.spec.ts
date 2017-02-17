@@ -42,7 +42,7 @@ describe('EventsComponent', () => {
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule.forRoot(),
+        MaterialModule,
         LibSharedModule,
         MockRouterModule
       ],

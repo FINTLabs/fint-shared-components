@@ -60,7 +60,7 @@ describe('FintDialogService', () => {
   ],
   imports: [
     BrowserModule,
-    MaterialModule.forRoot()
+    MaterialModule
   ],
   entryComponents: [ConfirmDeleteComponent, ErrorComponent]
 })

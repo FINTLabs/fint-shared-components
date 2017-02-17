@@ -10,7 +10,7 @@ import { ConfirmDeleteComponent } from './confirm-delete.component';
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     MdDialogModule.forRoot()
   ],
   entryComponents: [ConfirmDeleteComponent],

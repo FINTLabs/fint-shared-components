@@ -10,7 +10,7 @@ import { ErrorComponent } from './error.component';
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     MdDialogModule.forRoot()
   ],
   entryComponents: [ErrorComponent],

@@ -16,7 +16,7 @@ describe('FlipCardComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        MaterialModule.forRoot()
+        MaterialModule
       ],
       declarations: [FlipCardComponent, FaComponent]
     })

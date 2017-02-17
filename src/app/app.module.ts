@@ -13,7 +13,7 @@ import { EventModule } from './events/events.module';
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule, //.forRoot(),
+    MaterialModule,
 
     EventModule,
     LibSharedModule
