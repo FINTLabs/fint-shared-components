@@ -10,5 +10,3 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(LibModule);
 
-export * from './app';
-
