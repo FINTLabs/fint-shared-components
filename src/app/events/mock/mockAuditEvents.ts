@@ -8,7 +8,7 @@ export let mockAuditEvent: IEvents = {
   corrId: '', timestamp: 12341234123, orgId: 'rogfk.no', source: 'Arbeidstaker', event: mockEvent
 };
 
-export let mockAuditEventGroup: IEventGroup {
+export let mockAuditEventGroup: IEventGroup = {
   corrId: '', currentEvent: mockEvent, events: [mockAuditEvent]
 }
 

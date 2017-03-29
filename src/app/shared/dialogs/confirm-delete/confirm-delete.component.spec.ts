@@ -31,7 +31,7 @@ describe('ConfirmDeleteComponent', () => {
 
   beforeEach(() => {
     dialog = TestBed.get(MdDialog);
-    const dialogRef = dialog.open(ConfirmDeleteComponent);
+    let dialogRef = dialog.open(ConfirmDeleteComponent);
     component = dialogRef.componentInstance;
   });
 

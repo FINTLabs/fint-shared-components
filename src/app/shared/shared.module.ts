@@ -1,10 +1,11 @@
+// Modules
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
+
 import { TypeaheadComponent } from './typeahead';
 import { FlipCardComponent } from './flip-card/flip-card.component';
-// Modules
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from '@angular/material';
 
 // Components
 import { PagerComponent } from './pager/pager.component';
@@ -52,10 +53,4 @@ import { HighlightPipe } from './pipes/highlight.pipe';
   entryComponents: [ConfirmDeleteComponent, ErrorComponent],
   providers: [FintDialogService]
 })
-export class LibSharedModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: LibSharedModule
-    }
-  }
-}
+export class LibSharedModule {}

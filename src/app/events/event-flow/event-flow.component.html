@@ -1,1 +1,169 @@
 <svg #svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"></svg>
+<!--<svg #svg xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0.0 0.0 610 570">
+  <defs>
+    <path id="downstream_arrow" d="M0,0L0,50L30,80L60,50L60,0Z"></path>
+    <path id="downstream_error" d="M0,0L0,50L25,80L50,50L50,0Z"></path>
+    <path id="upstream_arrow" d="M0,30L0,80L60,80L60,30L30,0Z"></path>
+    <path id="upstream_error" d="M0,30L0,80L50,80L50,30L25,0Z"></path>
+    <path id="upstream_long_arrow" d="M0,30L0,120L60,120L60,30L30,0Z"></path>
+    <path id="descission" d="m0 0l27 -16l27 16l-27 16z"></path>
+    <path id="descission_small" d="m0 0l12 -9l12 9l-12 9z"></path>
+  </defs>
+  <g>
+    <g id="downstream_direction" transform="translate(0,0)">
+      <path d="M15,0L45,0L45,540L60,540L30,570L0,540L15,540Z"></path>
+      <text x="160" y="-25">Downstream</text>
+    </g>
+    <g id="upstream_direction" transform="translate(550,0)">
+      <path d="M30,0L60,30L45,30L45,570L15,570L15,30L0,30Z"></path>
+      <text x="-305" y="35">Upstream</text>
+    </g>
+    <g id="Client_CacheService" transform="translate(122.5,0)">
+      <rect width="365" height="44" fill="#ff9900"></rect>
+      <text x="94.46460723876953" y="26.05113636363636">Client: CACHE_SERVICE</text>
+    </g>
+    <g id="Provider" transform="translate(122.5,482)">
+      <rect width="365" height="44" fill="#666666"></rect>
+      <text x="154.81858825683594" y="26.05113636363636" style="fill: #d9d9d9">Provider</text>
+    </g>
+    <g id="Cache_DB" transform="translate(234.5,345)" class="">
+      <path fill="#b7b7b7" d="m0 0l0 0c0 -12 32 -22 72 -22c40 0 72 10 72 22l0 90c0 12 -32 22 -72 22c-40 0 -72 -10 -72 -22z"></path>
+      <path stroke="#efefef" stroke-width="1" stroke-linejoin="round" stroke-linecap="butt" d="m144 0l0 0c0 12 -32 22 -72 22c-40 0 -72 -10 -72 -22"></path>
+      <text x="50.47001266479492" y="55.833333333333336">Cache</text>
+    </g>
+    <g id="downstream" transform="translate(0,0)">
+      <g transform="translate(165,0)" class="pathLink">
+        <path d="m84 147l0 44l-75 0l0 40" class="link"></path>
+        <use id="decide_NEW__CACHE-DOWNSTREAM_QUEUE" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#descission" class="descission" x="56" y="191"></use>
+      </g>
+      <g id="NEW" transform="translate(219,69)" class="stream active">
+        <path d="M0,0L0,50L30,80L60,50L60,0Z"></path>
+        <text x="10.000673294067383" y="14.697916666666666">
+          <tspan x="22.50025224685669" y="14.697916666666666" dy="1.1em">NEW</tspan>
+          <tspan x="20.00033664703369" y="14.697916666666666" dy="2.2em">(10)</tspan>
+        </text>
+      </g>
+      <g id="CACHE" transform="translate(219,230)" class="stream">
+        <path d="M0,0L0,50L30,80L60,50L60,0Z"></path>
+        <text x="5.00084114074707" y="14.697916666666666">
+          <tspan x="17.500420570373535" y="14.697916666666666" dy="1.1em">CACHE</tspan>
+          <tspan x="20.00033664703369" y="14.697916666666666" dy="2.2em">(50)</tspan>
+        </text>
+      </g>
+      <g id="DOWNSTREAM_QUEUE" transform="translate(144,230)" class="stream active">
+        <path d="M0,0L0,50L30,80L60,50L60,0Z"></path>
+        <text x="-0.006046295166015625" y="14.697916666666666">
+          <tspan x="5.00084114074707" y="14.697916666666666" dy="1.1em">DOWNSTREAM</tspan>
+          <tspan x="17.500420570373535" y="14.697916666666666" dy="2.2em">QUEUE</tspan>
+          <tspan x="20.00033664703369" y="14.697916666666666" dy="3.3000000000000003em">(11)</tspan>
+        </text>
+      </g>
+      <g id="DELIVERED_TO_PROVIDER" transform="translate(144,310)" class="stream active">
+        <path d="M0,0L0,50L30,80L60,50L60,0Z"></path>
+        <text x="-0.00562286376953125" y="14.697916666666666">
+          <tspan x="7.500757217407227" y="14.697916666666666" dy="1.1em">DELIVERED</tspan>
+          <tspan x="25.000168323516846" y="14.697916666666666" dy="2.2em">TO</tspan>
+          <tspan x="10.000673294067383" y="14.697916666666666" dy="3.3000000000000003em">PROVIDER</tspan>
+          <tspan x="20.00033664703369" y="14.697916666666666" dy="4.4em">(12)</tspan>
+        </text>
+      </g>
+      <g id="PROVIDER_ACCEPTED" transform="translate(144,393)" class="stream active">
+        <path d="M0,0L0,50L30,80L60,50L60,0Z"></path>
+        <text x="-0.005962371826171875" y="14.697916666666666">
+          <tspan x="10.000673294067383" y="14.697916666666666" dy="1.1em">PROVIDER</tspan>
+          <tspan x="10.000673294067383" y="14.697916666666666" dy="2.2em">ACCEPTED</tspan>
+          <tspan x="20.00033664703369" y="14.697916666666666" dy="3.3000000000000003em">(13)</tspan>
+        </text>
+      </g>
+      <g id="PROVIDER_RESPONSE_ORPHAN" transform="translate(80,393)" class="error">
+        <path d="M0,0L0,50L25,80L50,50L50,0Z"></path>
+        <text x="-0.00528717041015625" y="14.697916666666666">
+          <tspan x="5.000673294067383" y="14.697916666666666" dy="1.1em">PROVIDER</tspan>
+          <tspan x="5.000673294067383" y="14.697916666666666" dy="2.2em">RESPONSE</tspan>
+          <tspan x="10.000504493713379" y="14.697916666666666" dy="3.3000000000000003em">ORPHAN</tspan>
+          <tspan x="12.500420570373535" y="14.697916666666666" dy="4.4em">(100)</tspan>
+        </text>
+      </g>
+    </g>
+    <g id="upstream" transform="translate(0,0)">
+      <g transform="translate(275,0)" class="pathLink">
+        <path d="m80 147l0 44l87 0l0 41" class="link"></path>
+        <use id="decide_CACHE_RESPONSE__UPSTREAM_QUEUE-SENT_TO_CLIENT" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#descission" class="descission" x="54" y="191"></use>
+      </g>
+      <g id="PROVIDER_RESPONSE" transform="translate(412,350)" class="stream active">
+        <path d="M0,30L0,120L60,120L60,30L30,0Z"></path>
+        <text x="-0.005962371826171875" y="32.046875">
+          <tspan x="10.000673294067383" y="32.046875" dy="1.1em">PROVIDER</tspan>
+          <tspan x="10.000673294067383" y="32.046875" dy="2.2em">RESPONSE</tspan>
+          <tspan x="20.00033664703369" y="32.046875" dy="3.3000000000000003em">(14)</tspan>
+        </text>
+      </g>
+      <g id="NO_RESPONSE_FOR_PROVIDER" transform="translate(482,343)" class="error">
+        <path d="M0,30L0,80L50,80L50,30L25,0Z"></path>
+        <text x="-0.00528717041015625" y="22.046875">
+          <tspan x="20.000168323516846" y="22.046875" dy="1.1em">NO</tspan>
+          <tspan x="5.000673294067383" y="22.046875" dy="2.2em">RESPONSE</tspan>
+          <tspan x="17.50025224685669" y="22.046875" dy="3.3000000000000003em">FOR</tspan>
+          <tspan x="5.000673294067383" y="22.046875" dy="4.4em">PROVIDER</tspan>
+          <tspan x="12.500420570373535" y="22.046875" dy="5.5em">(101)</tspan>
+        </text>
+      </g>
+      <g id="PROVIDER_REJECTED" transform="translate(482,343)" class="error">
+        <path d="M0,30L0,80L50,80L50,30L25,0Z"></path>
+        <text x="-0.005878448486328125" y="22.046875">
+          <tspan x="5.000673294067383" y="22.046875" dy="1.1em">PROVIDER</tspan>
+          <tspan x="5.000673294067383" y="22.046875" dy="2.2em">REJECTED</tspan>
+          <tspan x="12.500420570373535" y="22.046875" dy="3.3000000000000003em">(102)</tspan>
+        </text>
+      </g>
+      <g id="PROVIDER_NOT_CONFIRMED" transform="translate(482,343)" class="error">
+        <path d="M0,30L0,80L50,80L50,30L25,0Z"></path>
+        <text x="-0.00545501708984375" y="22.046875">
+          <tspan x="5.000673294067383" y="22.046875" dy="1.1em">PROVIDER</tspan>
+          <tspan x="17.50025224685669" y="22.046875" dy="2.2em">NOT</tspan>
+          <tspan x="2.5007572174072266" y="22.046875" dy="3.3000000000000003em">CONFIRMED</tspan>
+          <tspan x="12.500420570373535" y="22.046875" dy="4.4em">(103)</tspan>
+        </text>
+      </g>
+      <g id="UNABLE_TO_DELIVER" transform="translate(482,343)" class="error">
+        <path d="M0,30L0,80L50,80L50,30L25,0Z"></path>
+        <text x="-0.005878448486328125" y="22.046875">
+          <tspan x="10.000504493713379" y="22.046875" dy="1.1em">UNABLE</tspan>
+          <tspan x="20.000168323516846" y="22.046875" dy="2.2em">TO</tspan>
+          <tspan x="7.500589370727539" y="22.046875" dy="3.3000000000000003em">DELIVER</tspan>
+          <tspan x="12.500420570373535" y="22.046875" dy="4.4em">(104)</tspan>
+        </text>
+      </g>
+      <g id="UPSTREAM_QUEUE" transform="translate(412,230)" class="stream active">
+        <path d="M0,30L0,120L60,120L60,30L30,0Z"></path>
+        <text x="-0.00394439697265625" y="32.046875">
+          <tspan x="10.000673294067383" y="32.046875" dy="1.1em">UPSTREAM</tspan>
+          <tspan x="17.500420570373535" y="32.046875" dy="2.2em">QUEUE</tspan>
+          <tspan x="20.00033664703369" y="32.046875" dy="3.3000000000000003em">(15)</tspan>
+          <tspan x="27.500084161758423" y="32.046875" dy="4.4em">/</tspan>
+          <tspan x="20.00033664703369" y="32.046875" dy="5.5em">TEMP</tspan>
+          <tspan x="10.000673294067383" y="32.046875" dy="6.6000000000000005em">UPSTREAM</tspan>
+          <tspan x="17.500420570373535" y="32.046875" dy="7.700000000000001em">QUEUE</tspan>
+          <tspan x="20.00033664703369" y="32.046875" dy="8.8em">(16)</tspan>
+        </text>
+      </g>
+      <g id="CACHE_RESPONSE" transform="translate(325,230)" class="stream">
+        <path d="M0,30L0,80L60,80L60,30L30,0Z"></path>
+        <text x="-0.006214141845703125" y="22.046875">
+          <tspan x="17.500420570373535" y="22.046875" dy="1.1em">CACHE</tspan>
+          <tspan x="10.000673294067383" y="22.046875" dy="2.2em">RESPONSE</tspan>
+          <tspan x="20.00033664703369" y="22.046875" dy="3.3000000000000003em">(51)</tspan>
+        </text>
+      </g>
+      <g id="SENT_TO_CLIENT" transform="translate(325,69)" class="stream active">
+        <path d="M0,30L0,80L60,80L60,30L30,0Z"></path>
+        <text x="-0.006214141845703125" y="22.046875">
+          <tspan x="20.00033664703369" y="22.046875" dy="1.1em">SENT</tspan>
+          <tspan x="25.000168323516846" y="22.046875" dy="2.2em">TO</tspan>
+          <tspan x="15.000504493713379" y="22.046875" dy="3.3000000000000003em">CLIENT</tspan>
+          <tspan x="20.00033664703369" y="22.046875" dy="4.4em">(49)</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>-->

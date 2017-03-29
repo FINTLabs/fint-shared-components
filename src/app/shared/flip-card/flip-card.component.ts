@@ -1,7 +1,6 @@
-import { ViewChild } from '@angular/core/src/metadata/di';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer, ViewChild } from '@angular/core';
 
-export enum SIDES {
+enum SIDES {
   FRONT,
   BACK
 }

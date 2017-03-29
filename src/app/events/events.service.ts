@@ -15,7 +15,7 @@ import { IEventsHALPage } from './model';
 export class EventService {
   constructor(private http: Http, private fintDialog: FintDialogService) { }
 
-  all(page: number = 1, pageSize: number = 10, search?: string): Observable<IEventsHALPage> {
+  all(page: number = 1, pageSize: number = 10, search?: string) {
     let url = 'https://api.felleskomponent.no/audit/events';
     //let url = 'http://localhost:8080/audit/events';
     if (search) { url = `${url}/search/${search}?page=${page}&pageSize=${pageSize}`; }
@@ -24,7 +24,7 @@ export class EventService {
       .get(url)
       .debounceTime(3000)
       .distinctUntilChanged()
-      .map((res: Response) => res.json())
+      .map((res: Response) => res.json() as IEventsHALPage)
       .share()
       .catch(error => this.handleError(error));
   }

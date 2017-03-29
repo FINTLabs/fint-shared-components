@@ -2,8 +2,7 @@ import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 
 @Component({
   selector: 'fint-fa-stack',
-  template: `<i [className]="classList"></i>`/*,
-  styleUrls: ['fa-stack.component.css']*/
+  template: `<i [className]="classList"></i>`
 })
 export class FaStackComponent implements OnChanges {
   @Input() size: number; // "1-5" <i class="fa-stack fa-3x"></i>
