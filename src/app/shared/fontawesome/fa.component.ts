@@ -23,7 +23,7 @@ export class FaComponent implements OnInit, OnChanges {
   @Input() fw: boolean; // true fa-fw
   @Input() inverse: boolean; // true fa-inverse
 
-  private classList: Array<string>;
+  classList: Array<string>;
 
   constructor(private el: ElementRef) {
     // TODO (travelist): Support for fa-li selector
@@ -128,12 +128,12 @@ export class FaComponent implements OnInit, OnChanges {
     });
   }
 
-  private addFaClass(className: string): void {
+  addFaClass(className: string): void {
     // better to check the uniquness
     this.classList.push(className);
   }
 
-  private removeFaClass(className: string): void {
+  removeFaClass(className: string): void {
     let index: number;
     if ((index = this.classList.indexOf(className)) >= 0) {
       this.classList.splice(index, 1);
