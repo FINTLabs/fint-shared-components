@@ -22,13 +22,22 @@ export class FlipCardComponent implements OnInit, AfterViewInit {
 
   constructor(private elm: ElementRef, private renderer: Renderer) { }
 
+  public get height() {
+    let frontHeight = this._front.nativeElement.firstElementChild ? this._front.nativeElement.firstElementChild.scrollHeight : 0;
+    let backHeight = this._back.nativeElement.firstElementChild ? this._back.nativeElement.firstElementChild.scrollHeight : 0;
+    return Math.max(frontHeight, backHeight) + 20;
+  }
+  public set height(value) {
+    if (value) {
+      this.renderer.setElementStyle(this.elm.nativeElement, 'min-height', value + 'px');
+    }
+  }
+
   ngOnInit() { }
 
   ngAfterViewInit() {
-    let frontHeight = this._front.nativeElement.firstElementChild ? this._front.nativeElement.firstElementChild.offsetHeight : 0;
-    let backHeight = this._back.nativeElement.firstElementChild ? this._back.nativeElement.firstElementChild.offsetHeight : 0;
-    let height = Math.max(frontHeight, backHeight) + 20;
-    this.renderer.setElementStyle(this.elm.nativeElement, 'min-height', height + 'px'); //this._front.offsetHeight);
+    const defaultHeight = this.height;
+    this.height = defaultHeight;
   }
 
   canAnimate() {
