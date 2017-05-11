@@ -1,9 +1,8 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FaComponent } from '../fontawesome';
 import { FlipCardComponent } from './flip-card.component';
@@ -16,7 +15,8 @@ describe('FlipCardComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        MaterialModule
+        MaterialModule,
+        BrowserAnimationsModule
       ],
       declarations: [FlipCardComponent, FaComponent]
     })

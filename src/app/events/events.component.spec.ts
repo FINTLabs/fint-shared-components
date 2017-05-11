@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By, Title } from '@angular/platform-browser';
-import { DebugElement, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule, APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Observable, Subject } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
@@ -44,7 +44,8 @@ describe('EventsComponent', () => {
         ReactiveFormsModule,
         MaterialModule,
         LibSharedModule,
-        MockRouterModule
+        MockRouterModule,
+        BrowserAnimationsModule
       ],
       declarations: [EventsComponent, EventFlowComponent],
       providers: [

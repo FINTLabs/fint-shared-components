@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, ConnectionBackend, Http, Response, ResponseOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -18,7 +19,8 @@ describe('FintDialogService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        MockModule
+        MockModule,
+        BrowserAnimationsModule
       ],
       providers: [
         FintDialogService,
@@ -60,7 +62,8 @@ describe('FintDialogService', () => {
   ],
   imports: [
     BrowserModule,
-    MaterialModule
+    MaterialModule,
+    BrowserAnimationsModule
   ],
   entryComponents: [ConfirmDeleteComponent, ErrorComponent]
 })

@@ -1,8 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
 import { FaComponent } from '../fontawesome';
@@ -16,7 +15,8 @@ describe('PagerComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        MaterialModule.forRoot()
+        BrowserAnimationsModule,
+        MaterialModule
       ],
       declarations: [PagerComponent, FaComponent]
     })

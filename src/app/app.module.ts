@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LibSharedModule } from './shared/shared.module';
 import { EventModule } from './events/events.module';
@@ -14,6 +15,7 @@ import { EventModule } from './events/events.module';
     FormsModule,
     HttpModule,
     MaterialModule,
+    BrowserAnimationsModule,
 
     EventModule,
     LibSharedModule

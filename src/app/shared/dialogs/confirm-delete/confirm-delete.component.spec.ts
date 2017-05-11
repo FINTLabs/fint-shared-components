@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { MaterialModule, MdDialog, MdDialogModule, MdDialogRef } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ConfirmDeleteComponent } from './confirm-delete.component';
 
@@ -11,6 +11,7 @@ import { ConfirmDeleteComponent } from './confirm-delete.component';
   imports: [
     CommonModule,
     MaterialModule,
+    BrowserAnimationsModule,
     MdDialogModule.forRoot()
   ],
   entryComponents: [ConfirmDeleteComponent],

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TypeaheadComponent } from './typeahead';
 import { FlipCardComponent } from './flip-card/flip-card.component';
@@ -37,6 +38,7 @@ import { HighlightPipe } from './pipes/highlight.pipe';
   imports: [
     CommonModule,
     MaterialModule,
+    BrowserAnimationsModule,
     HttpModule
   ],
   exports: [

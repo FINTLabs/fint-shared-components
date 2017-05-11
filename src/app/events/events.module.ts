@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EventRoutes } from './events.routes';
 import { EventService } from './events.service';
@@ -22,6 +23,7 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     MaterialModule,
     LibSharedModule,
     RouterModule.forChild([...EventRoutes])

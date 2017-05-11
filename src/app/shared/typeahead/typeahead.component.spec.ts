@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FaComponent } from '../fontawesome';
 import { TypeaheadComponent } from './typeahead.component';
@@ -16,7 +17,8 @@ describe('PagerComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        MaterialModule
+        MaterialModule,
+        BrowserAnimationsModule
       ],
       declarations: [TypeaheadComponent, FaComponent]
     })
