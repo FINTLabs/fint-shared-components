@@ -4,8 +4,9 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatPaginatorModule } from '@angular/material';
+import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 
 import { EventRoutes } from './events.routes';
 import { EventService } from './events.service';
@@ -24,10 +25,15 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatPaginatorModule,
+
+    AngularFontAwesomeModule,
+
     LibSharedModule,
     RouterModule.forChild([...EventRoutes])
   ],
