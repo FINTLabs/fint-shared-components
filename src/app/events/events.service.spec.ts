@@ -2,7 +2,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 import { ConnectionBackend, Http, BaseRequestOptions } from '@angular/http';
-import { MdDialog, Overlay, OverlayContainer } from '@angular/material';
+import { MatDialog, Overlay, OverlayContainer } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OVERLAY_PROVIDERS } from "@angular/material";
 
@@ -24,7 +24,7 @@ describe('Service: Events', () => {
         FintDialogService,
 
         // Required for testing components using angular-material
-        MdDialog,
+        MatDialog,
         Overlay,
         OverlayContainer,
         BrowserAnimationsModule,

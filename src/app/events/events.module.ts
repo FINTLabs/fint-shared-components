@@ -4,7 +4,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EventRoutes } from './events.routes';
@@ -24,7 +24,10 @@ import { EventFlowComponent } from './event-flow/event-flow.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     LibSharedModule,
     RouterModule.forChild([...EventRoutes])
   ],

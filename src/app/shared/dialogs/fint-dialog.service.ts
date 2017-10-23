@@ -1,6 +1,6 @@
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { ErrorComponent } from './error/error.component';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
@@ -8,9 +8,9 @@ import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.componen
 @Injectable()
 export class FintDialogService {
 
-  constructor(private dialog: MdDialog) { }
+  constructor(private dialog: MatDialog) { }
 
-  displayHttpError(error: Response): MdDialogRef<ErrorComponent> {
+  displayHttpError(error: Response): MatDialogRef<ErrorComponent> {
     let body; let err;
     try {
       body = error.json();
@@ -33,7 +33,7 @@ export class FintDialogService {
     return errorDialogRef;
   }
 
-  confirmDelete(): MdDialogRef<ConfirmDeleteComponent> {
+  confirmDelete(): MatDialogRef<ConfirmDeleteComponent> {
     return this.dialog.open(ConfirmDeleteComponent, {
       disableClose: false
     });

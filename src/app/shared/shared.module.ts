@@ -2,16 +2,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { MatDialogModule, MatButtonModule, MatListModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { TypeaheadComponent } from './typeahead';
-import { FlipCardComponent } from './flip-card/flip-card.component';
-
 // Components
-import { PagerComponent } from './pager/pager.component';
-import { FaStackComponent } from './fontawesome/fa-stack.component';
-import { FaComponent } from './fontawesome/fa.component';
+import { FlipCardComponent } from './flip-card/flip-card.component';
 import { ConfirmDeleteComponent } from './dialogs/confirm-delete/confirm-delete.component';
 import { ErrorComponent } from './dialogs/error/error.component';
 import { FintDialogService } from './dialogs/fint-dialog.service';
@@ -22,12 +17,7 @@ import { HighlightPipe } from './pipes/highlight.pipe';
 
 @NgModule({
   declarations: [
-    FaComponent,
-    FaStackComponent,
-    PagerComponent,
     FlipCardComponent,
-    TypeaheadComponent,
-
     ConfirmDeleteComponent,
     ErrorComponent,
 
@@ -37,16 +27,14 @@ import { HighlightPipe } from './pipes/highlight.pipe';
   ],
   imports: [
     CommonModule,
-    MaterialModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatListModule,
     BrowserAnimationsModule,
     HttpModule
   ],
   exports: [
-    FaComponent,
-    FaStackComponent,
-    PagerComponent,
     FlipCardComponent,
-    TypeaheadComponent,
 
     // Pipes
     HighlightPipe,

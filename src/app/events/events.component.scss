@@ -1,17 +1,17 @@
-.md-spinner-container {
+.mat-spinner-container {
   position: absolute;
   top: 0; bottom: 0;
   left: 0; right: 0;
   z-index: 5;
   background: rgba(white, 0.7);
-  md-spinner {
+  mat-spinner {
     position: relative;
     top: 30%;
     bottom: 30%;
   }
 }
 
-md-input-container {
+mat-form-field {
   width: 100%;
   display: block;
   button {
@@ -21,7 +21,7 @@ md-input-container {
     min-width: 2em;
   }
 }
-md-card-content app-pager {
+mat-card-content app-pager {
   margin-top: -2em;
 }
 

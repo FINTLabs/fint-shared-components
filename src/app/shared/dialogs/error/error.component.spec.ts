@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgModule } from '@angular/core';
-import { MaterialModule, MdDialog, MdDialogModule } from '@angular/material';
+import { MaterialModule, MatDialog, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ErrorComponent } from './error.component';
@@ -12,7 +12,7 @@ import { ErrorComponent } from './error.component';
     CommonModule,
     MaterialModule,
     BrowserAnimationsModule,
-    MdDialogModule.forRoot()
+    MatDialogModule.forRoot()
   ],
   entryComponents: [ErrorComponent],
   declarations: [ErrorComponent]
@@ -21,7 +21,7 @@ class ErrorDialogSpecModule { }
 
 describe('ErrorComponent', () => {
   let component: ErrorComponent;
-  let dialog: MdDialog;
+  let dialog: MatDialog;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,7 +31,7 @@ describe('ErrorComponent', () => {
   }));
 
   beforeEach(() => {
-    dialog = TestBed.get(MdDialog);
+    dialog = TestBed.get(MatDialog);
     const dialogRef = dialog.open(ErrorComponent);
     component = dialogRef.componentInstance;
   });

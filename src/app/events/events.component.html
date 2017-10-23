@@ -4,19 +4,19 @@
   Viser et hendelsesforløp
 </div>
 
-<md-card>
-  <div class="md-spinner-container" *ngIf="isLoading">
-    <md-spinner class="center"></md-spinner>
+<mat-card>
+  <div class="mat-spinner-container" *ngIf="isLoading">
+    <mat-spinner class="center"></mat-spinner>
   </div>
 
-  <md-card-title>
-    <md-input-container>
-      <input mdInput md-input type="text" [(ngModel)]="searchstring" role="searchbox" #search>
-      <button md-suffix md-button (click)="searchstring = ''"><fint-fa name="times"></fint-fa></button>
-      <button md-suffix md-button role="search"><fint-fa name="search"></fint-fa>Søk</button>
-    </md-input-container>
-  </md-card-title>
-  <md-card-content class="table-container" *ngIf="eventGroups">
+  <mat-card-title>
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)]="searchstring" role="searchbox" #search>
+      <button mat-suffix mat-button (click)="searchstring = ''"><fint-fa name="times"></fint-fa></button>
+      <button mat-suffix mat-button role="search"><fint-fa name="search"></fint-fa>Søk</button>
+    </mat-form-field>
+  </mat-card-title>
+  <mat-card-content class="table-container" *ngIf="eventGroups">
     <fint-pager [total]="pages" [min]="1" [(page)]="current"></fint-pager>
     <table>
       <thead>
@@ -82,8 +82,8 @@
         </tr>
       </tbody>
     </table>
-  </md-card-content>
-  <md-card-actions>
+  </mat-card-content>
+  <mat-card-actions>
     <fint-pager [total]="pages" [min]="1" [(page)]="current"></fint-pager>
-  </md-card-actions>
-</md-card>
+  </mat-card-actions>
+</mat-card>

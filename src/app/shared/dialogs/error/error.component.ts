@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'fint-error',
@@ -11,5 +11,5 @@ export class ErrorComponent {
   errorSubtitle: string = '';
   path: string = '';
 
-  constructor(private dialogRef: MdDialogRef<ErrorComponent>) { }
+  constructor(private dialogRef: MatDialogRef<ErrorComponent>) { }
 }

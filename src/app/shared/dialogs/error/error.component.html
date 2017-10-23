@@ -1,12 +1,12 @@
-<h1 md-dialog-title>
+<h1 mat-dialog-title>
   En feil oppstod!
   <small *ngIf="errorSubtitle" class="subtitle">{{ errorSubtitle }}</small>
 </h1>
 <p class="path"><small>{{ path }}</small></p>
 
 <em>Feilmelding:</em>
-<p md-dialog-content>{{ errorMessage }}</p>
+<p mat-dialog-content>{{ errorMessage }}</p>
 
-<md-dialog-actions>
-  <button md-button md-dialog-close>Ok</button>
-</md-dialog-actions>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Ok</button>
+</mat-dialog-actions>
