@@ -6,10 +6,7 @@ An angular2 module housing common components used accross the FINT projects appi
 
 ** Components **
 
-* [fint-autocomplete](./autocomplete/README.md)
 * [fint-flip-card](./flip-card/README.md)
-* [fint-fa](./fontawesome/README.md)
-* [fint-pager](./pager/README.md)
 
 ** Pipes **
 

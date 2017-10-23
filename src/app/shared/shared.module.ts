@@ -2,8 +2,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { MatDialogModule, MatButtonModule, MatListModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
+import { MatDialogModule, MatButtonModule, MatListModule } from '@angular/material';
 
 // Components
 import { FlipCardComponent } from './flip-card/flip-card.component';
@@ -27,6 +28,8 @@ import { HighlightPipe } from './pipes/highlight.pipe';
   ],
   imports: [
     CommonModule,
+
+    AngularFontAwesomeModule,
     MatDialogModule,
     MatButtonModule,
     MatListModule,

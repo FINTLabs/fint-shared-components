@@ -12,8 +12,8 @@
   <mat-card-title>
     <mat-form-field>
       <input matInput type="text" [(ngModel)]="searchstring" role="searchbox" #search>
-      <button mat-suffix mat-button (click)="searchstring = ''"><fint-fa name="times"></fint-fa></button>
-      <button mat-suffix mat-button role="search"><fint-fa name="search"></fint-fa>Søk</button>
+      <button mat-suffix mat-button (click)="searchstring = ''"><fa name="times"></fa></button>
+      <button mat-suffix mat-button role="search"><fa name="search"></fa>Søk</button>
     </mat-form-field>
   </mat-card-title>
   <mat-card-content class="table-container" *ngIf="eventGroups">
