@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions, ConnectionBackend, Http, Response, ResponseOptions } from '@angular/http';
@@ -62,7 +62,7 @@ describe('FintDialogService', () => {
   ],
   imports: [
     BrowserModule,
-    MaterialModule,
+    MatDialogModule,
     BrowserAnimationsModule
   ],
   entryComponents: [ConfirmDeleteComponent, ErrorComponent]

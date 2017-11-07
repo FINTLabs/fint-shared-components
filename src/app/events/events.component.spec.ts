@@ -4,8 +4,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule, APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import {
+  MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatPaginatorModule, MatProgressSpinnerModule
+} from '@angular/material';
 
 import { Observable, Subject } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
@@ -42,7 +45,17 @@ describe('EventsComponent', () => {
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule,
+        BrowserAnimationsModule,
+
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+
+        AngularFontAwesomeModule,
+
         LibSharedModule,
         MockRouterModule,
         BrowserAnimationsModule

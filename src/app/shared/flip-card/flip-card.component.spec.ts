@@ -1,10 +1,9 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
-import { FaComponent } from '../fontawesome';
 import { FlipCardComponent } from './flip-card.component';
 
 describe('FlipCardComponent', () => {
@@ -15,10 +14,10 @@ describe('FlipCardComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        MaterialModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        AngularFontAwesomeModule
       ],
-      declarations: [FlipCardComponent, FaComponent]
+      declarations: [FlipCardComponent]
     })
       .compileComponents();
   }));

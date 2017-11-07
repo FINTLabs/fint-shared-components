@@ -28,15 +28,16 @@ import { HighlightPipe } from './pipes/highlight.pipe';
   ],
   imports: [
     CommonModule,
-
+    BrowserAnimationsModule,
+    HttpModule,
     AngularFontAwesomeModule,
+
     MatDialogModule,
     MatButtonModule,
     MatListModule,
-    BrowserAnimationsModule,
-    HttpModule
   ],
   exports: [
+    CommonModule,
     FlipCardComponent,
 
     // Pipes

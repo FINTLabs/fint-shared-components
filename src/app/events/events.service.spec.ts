@@ -2,9 +2,8 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { MockBackend } from '@angular/http/testing';
 import { ConnectionBackend, Http, BaseRequestOptions } from '@angular/http';
-import { MatDialog, Overlay, OverlayContainer } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OVERLAY_PROVIDERS } from "@angular/material";
 
 import { EventService } from './events.service';
 import { FintDialogService } from '../shared/dialogs';
@@ -12,6 +11,11 @@ import { FintDialogService } from '../shared/dialogs';
 describe('Service: Events', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        // Required for testing components using angular-material
+        MatDialogModule,
+        BrowserAnimationsModule,
+      ],
       providers: [
         {
           provide: Http, useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
@@ -22,13 +26,6 @@ describe('Service: Events', () => {
         BaseRequestOptions,
         EventService,
         FintDialogService,
-
-        // Required for testing components using angular-material
-        MatDialog,
-        Overlay,
-        OverlayContainer,
-        BrowserAnimationsModule,
-        OVERLAY_PROVIDERS
       ]
     });
   });

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgModule } from '@angular/core';
-import { MaterialModule, MatDialog, MatDialogModule } from '@angular/material';
+import { MatDialog, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ErrorComponent } from './error.component';
@@ -10,9 +10,8 @@ import { ErrorComponent } from './error.component';
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule,
     BrowserAnimationsModule,
-    MatDialogModule.forRoot()
+    MatDialogModule
   ],
   entryComponents: [ErrorComponent],
   declarations: [ErrorComponent]
